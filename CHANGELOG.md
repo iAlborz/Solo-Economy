@@ -6,6 +6,8 @@
 - Added `max_active_orders_per_player` and `max_active_auctions_per_player` config options (`0` = unlimited), overridable per player from the admin Players menu.
 
 ### Improvements
+- Paginated menus now use recipe-book style page controls in the gap above Inventory. They stay hidden when there is only one page.
+- Menus with a Back action now use Minecraft's transferable-list unselect arrow next to the title instead of a barrier in the footer.
 - The shop, auction house, orders, admin shop, item picker, and player picker GUIs now have a recipe-book style search field on the right of the title bar. Typing filters in place; `/eco search` with no query clears it.
 - New orders now reserve payment upfront.
 
