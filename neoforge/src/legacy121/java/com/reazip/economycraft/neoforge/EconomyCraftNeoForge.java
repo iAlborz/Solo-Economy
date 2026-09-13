@@ -1,7 +1,10 @@
 package com.reazip.economycraft.neoforge;
 
 import com.reazip.economycraft.EconomyCraft;
+import com.reazip.economycraft.client.InstaSellOverlay;
 import com.reazip.economycraft.client.MenuPaginationOverlay;
+import com.reazip.economycraft.client.RecipeBookShopOverlay;
+import com.reazip.economycraft.client.ShopCategoryOverlay;
 import com.reazip.economycraft.client.ShopSearchOverlay;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
@@ -21,8 +24,11 @@ public final class EconomyCraftNeoForge {
         EconomyCraft.registerEvents();
         NeoForge.EVENT_BUS.register(this);
         EnvExecutor.runInEnv(Env.CLIENT, () -> () -> {
+            RecipeBookShopOverlay.register();
             MenuPaginationOverlay.register();
             ShopSearchOverlay.register();
+            ShopCategoryOverlay.register();
+            InstaSellOverlay.register();
         });
 
         if (EconomyCraftNeoForgeModIds.isPlaceholderApiLoaded()) {

@@ -26,7 +26,7 @@ public final class ShopSearchOverlay {
     private static final int FIELD_HEIGHT = 14;
     private static final int ICON_SIZE = 12;
     private static final int ICON_TO_FIELD = 17;
-    private static final Component ITEMS_HINT = hint("Search items");
+    private static final Component ITEMS_HINT = hint("Search");
     private static final Component PLAYERS_HINT = hint("Search players");
 
     private static boolean registered;
@@ -53,16 +53,19 @@ public final class ShopSearchOverlay {
         int imageHeight = 114 + rows * 18;
         int left = (screen.width - 176) / 2;
         int top = (screen.height - imageHeight) / 2;
-        int groupWidth = ICON_TO_FIELD + FIELD_WIDTH;
+        boolean showIcon = search.hint.getString().toLowerCase().contains("player");
+        int groupWidth = (showIcon ? ICON_TO_FIELD : 0) + FIELD_WIDTH;
         int x = left + 176 - 7 - groupWidth;
         int y = top + 2;
 
-        ImageWidget icon = ImageWidget.sprite(ICON_SIZE, ICON_SIZE, Identifier.withDefaultNamespace("icon/search"));
-        icon.setX(x);
-        icon.setY(y + 1);
-        access.addRenderableWidget(icon);
+        if (showIcon) {
+            ImageWidget icon = ImageWidget.sprite(ICON_SIZE, ICON_SIZE, Identifier.withDefaultNamespace("icon/search"));
+            icon.setX(x);
+            icon.setY(y + 1);
+            access.addRenderableWidget(icon);
+        }
 
-        EditBox box = new EditBox(minecraft.font, x + ICON_TO_FIELD, y, FIELD_WIDTH, FIELD_HEIGHT, search.hint) {
+        EditBox box = new EditBox(minecraft.font, x + (showIcon ? ICON_TO_FIELD : 0), y, FIELD_WIDTH, FIELD_HEIGHT, search.hint) {
             @Override
             public boolean keyPressed(KeyEvent event) {
                 if (super.keyPressed(event)) return true;
@@ -101,7 +104,7 @@ public final class ShopSearchOverlay {
         String title = screen.getTitle().getString();
         String query = title.startsWith("Search:") ? title.substring("Search:".length()).trim() : "";
         String hintName = null;
-        boolean found = "Shop".equals(title) || title.startsWith("Search:");
+        boolean found = title.startsWith("Search:");
         for (Slot slot : screen.getMenu().slots) {
             ItemStack stack = slot.getItem();
             if (stack.isEmpty()) continue;

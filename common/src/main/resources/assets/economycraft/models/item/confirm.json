@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:block/lime_stained_glass",
+    "layer1": "economycraft:block/confirm"
+  }
+}

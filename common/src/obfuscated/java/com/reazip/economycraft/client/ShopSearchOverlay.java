@@ -100,7 +100,7 @@ public final class ShopSearchOverlay {
         String title = screen.getTitle().getString();
         String query = title.startsWith("Search:") ? title.substring("Search:".length()).trim() : "";
         String hintName = null;
-        boolean found = "Shop".equals(title) || title.startsWith("Search:");
+        boolean found = title.startsWith("Search:");
         for (Slot slot : screen.getMenu().slots) {
             ItemStack stack = slot.getItem();
             if (stack.isEmpty()) continue;

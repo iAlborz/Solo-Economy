@@ -5,11 +5,11 @@ license = "GPL-3.0"
 [[mods]]
 modId = "economycraft"
 version = "${version}"
-displayName = "EconomyCraft"
-authors = "ReaZip"
+displayName = "Solo Economy"
+authors = "Alborz"
 logoFile = "assets/economycraft/logo.png"
 description = '''
-Simple server-side economy and shop mod.
+A solo survival shop and money system. Based on EconomyCraft by ReaZip.
 '''
 
 # ---- Minecraft:

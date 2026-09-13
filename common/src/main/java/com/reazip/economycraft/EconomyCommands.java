@@ -1,11 +1,8 @@
 package com.reazip.economycraft;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.mojang.logging.LogUtils;
@@ -13,9 +10,7 @@ import com.reazip.economycraft.admin.AdminUi;
 import com.reazip.economycraft.util.AsyncFileWriter;
 import com.reazip.economycraft.util.EconomyPaths;
 import com.reazip.economycraft.util.EconomySounds;
-import com.reazip.economycraft.util.ExpirationUtil;
 import com.reazip.economycraft.util.IdentityCompat;
-import com.reazip.economycraft.util.ItemArgumentCompat;
 import com.reazip.economycraft.util.LiveSearchable;
 import com.reazip.economycraft.util.PermissionCompat;
 import net.minecraft.ChatFormatting;
@@ -23,8 +18,6 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.GameProfileArgument;
-import net.minecraft.commands.arguments.item.ItemArgument;
-import net.minecraft.commands.arguments.item.ItemInput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,15 +26,8 @@ import org.slf4j.Logger;
 import java.util.*;
 
 import java.util.concurrent.CompletableFuture;
-import com.reazip.economycraft.auction.AuctionListing;
-import com.reazip.economycraft.auction.AuctionManager;
-import com.reazip.economycraft.auction.AuctionUi;
+import com.reazip.economycraft.shop.ShopDisplay;
 import com.reazip.economycraft.shop.ShopUi;
-import com.reazip.economycraft.orders.OrderFulfillment;
-import com.reazip.economycraft.orders.OrderManager;
-import com.reazip.economycraft.orders.OrderRequest;
-import com.reazip.economycraft.orders.OrdersUi;
-import net.minecraft.world.item.ItemStack;
 
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
@@ -50,7 +36,6 @@ import org.jetbrains.annotations.Nullable;
 
 public final class EconomyCommands {
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final int MAIN_INVENTORY_SLOTS = 36;
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext,
                                 Commands.CommandSelection selection) {
         dispatcher.register(buildRoot(
@@ -63,14 +48,8 @@ public final class EconomyCommands {
         ));
 
         dispatcher.register(buildBalance().requires(s -> EconomyConfig.get().standaloneCommands));
-        dispatcher.register(buildPay().requires(s -> EconomyConfig.get().standaloneCommands));
         dispatcher.register(SellCommand.register().requires(s -> EconomyConfig.get().standaloneCommands && EconomyConfig.get().sellEnabled));
-        registerStandalone(dispatcher, buildAuction("ah"));
-        registerStandalone(dispatcher, buildAuction("auction"));
         registerStandalone(dispatcher, buildShop());
-        dispatcher.register(buildOrders(buildContext).requires(s -> EconomyConfig.get().standaloneCommands));
-        dispatcher.register(buildDaily().requires(s -> EconomyConfig.get().standaloneCommands));
-        dispatcher.register(buildTransactions().requires(s -> EconomyConfig.get().standaloneCommands));
         dispatcher.register(WorthCommand.register(buildContext).requires(s ->
                 EconomyConfig.get().standaloneCommands && EconomyConfig.get().worthEnabled));
 
@@ -126,19 +105,18 @@ public final class EconomyCommands {
                 .executes(ctx -> openAdmin(ctx.getSource())));
 
         root.then(buildBalance());
-        root.then(buildPay());
         root.then(SellCommand.register().requires(s -> EconomyConfig.get().sellEnabled));
-        root.then(buildAuction("ah"));
-        root.then(buildAuction("auction"));
+        root.then(SellCommand.registerInstaSell().requires(s -> EconomyConfig.get().sellEnabled));
         root.then(buildShop());
-        root.then(buildOrders(buildContext));
-        root.then(buildDaily());
-        root.then(buildTransactions());
         root.then(WorthCommand.register(buildContext).requires(s -> EconomyConfig.get().worthEnabled));
         root.then(literal("search")
                 .executes(ctx -> applyLiveSearch(ctx.getSource(), ""))
                 .then(argument("query", StringArgumentType.greedyString())
                         .executes(ctx -> applyLiveSearch(ctx.getSource(), StringArgumentType.getString(ctx, "query")))));
+        root.then(literal("buy")
+                .requires(s -> EconomyConfig.get().shopEnabled)
+                .then(argument("item", StringArgumentType.greedyString())
+                        .executes(ctx -> buyItem(ctx.getSource(), StringArgumentType.getString(ctx, "item")))));
 
         root.then(addMoney);
         root.then(setMoney);
@@ -225,29 +203,10 @@ public final class EconomyCommands {
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildBalance() {
         return literal("bal")
-                .then(literal("top")
-                        .executes(ctx -> balTop(ctx.getSource())))
                 .executes(ctx -> showBalance(IdentityCompat.of(ctx.getSource().getPlayerOrException()), ctx.getSource()))
                 .then(argument("target", StringArgumentType.word())
                         .suggests((ctx, builder) -> suggestPlayers(ctx.getSource(), builder))
                         .executes(ctx -> showBalance(StringArgumentType.getString(ctx, "target"), ctx.getSource())));
-    }
-
-    private static LiteralArgumentBuilder<CommandSourceStack> buildPay() {
-        String payUsage = "/pay <player> <amount>";
-        return literal("pay")
-                .executes(ctx -> usage(ctx.getSource(), payUsage))
-                .then(argument("player", StringArgumentType.word())
-                        .suggests((ctx, builder) -> suggestPlayers(ctx.getSource(), builder))
-                        .executes(ctx -> usage(ctx.getSource(), payUsage))
-                        .then(argument("amount", StringArgumentType.word())
-                                .executes(ctx -> {
-                                    Long amount = parseAmount(ctx.getSource(), StringArgumentType.getString(ctx, "amount"), 1, EconomyManager.MAX);
-                                    if (amount == null) return 0;
-                                    return pay(ctx.getSource().getPlayerOrException(),
-                                            StringArgumentType.getString(ctx, "player"),
-                                            amount, ctx.getSource());
-                                })));
     }
 
     private static int usage(CommandSourceStack source, String usage) {
@@ -309,103 +268,6 @@ public final class EconomyCommands {
         String resolvedName = manager.getBestName(targetId);
         return showBalance(new IdentityCompat.PlayerRef(targetId,
                 resolvedName == null || resolvedName.isBlank() ? targetName : resolvedName), source);
-    }
-
-    private static int balTop(CommandSourceStack source) {
-        EconomyManager manager = EconomyCraft.getManager(source.getServer());
-        List<EconomyManager.LeaderboardEntry> sorted = manager.getLeaderboardEntries(10);
-        if (sorted.isEmpty()) {
-            source.sendFailure(Component.literal("No balances found").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        StringBuilder sb = new StringBuilder("Top balances:\n");
-        for (int i = 0; i < sorted.size(); i++) {
-            var e = sorted.get(i);
-
-            sb.append(i + 1)
-                    .append(". ")
-                    .append(e.name())
-                    .append(": ")
-                    .append(EconomyCraft.formatMoney(e.balance()));
-
-            if (i + 1 < sorted.size()) sb.append("\n");
-        }
-
-        Component msg = Component.literal(sb.toString()).withStyle(ChatFormatting.GOLD);
-
-        ServerPlayer executor = tryGetPlayer(source);
-        reply(source, executor, msg, false);
-
-        return sorted.size();
-    }
-
-    private static int pay(ServerPlayer from, String target, long amount, CommandSourceStack source) {
-        var server = source.getServer();
-        EconomyManager manager = EconomyCraft.getManager(server);
-
-        ServerPlayer toOnline = server.getPlayerList().getPlayerByName(target);
-        UUID toId = (toOnline != null) ? toOnline.getUUID() : null;
-
-        if (toId == null) {
-            try { toId = UUID.fromString(target); } catch (IllegalArgumentException ignored) {}
-        }
-
-        if (toId == null) {
-            toId = manager.tryResolveUuidByName(target);
-        }
-
-        if (toId == null) {
-            EconomySounds.failure(from);
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        if (from.getUUID().equals(toId)) {
-            EconomySounds.failure(from);
-            source.sendFailure(Component.literal("You cannot pay yourself").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        if (!manager.getBalances().containsKey(toId)) {
-            EconomySounds.failure(from);
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        String displayName = toOnline != null ? IdentityCompat.of(toOnline).name() : manager.getBestName(toId);
-        if (displayName == null || displayName.isBlank()) {
-            EconomySounds.failure(from);
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        var payment = manager.pay(from.getUUID(), toId, amount, EconomySources.PLAYER_PAYMENT);
-        if (payment.successful()) {
-
-            ServerPlayer executor = tryGetPlayer(source);
-            if (executor != null) EconomySounds.success(executor);
-
-            Component msg = Component.literal("Paid " + EconomyCraft.formatMoney(amount) + " to " + displayName)
-                    .withStyle(ChatFormatting.GREEN);
-
-            reply(source, executor, msg, false);
-
-            if (toOnline != null) {
-                EconomySounds.moneyReceived(toOnline);
-                toOnline.sendSystemMessage(
-                        Component.literal(from.getName().getString() + " sent you " + EconomyCraft.formatMoney(amount))
-                                .withStyle(ChatFormatting.GREEN)
-                );
-            }
-        } else {
-            EconomySounds.failure(from);
-            String message = payment.status() == com.reazip.economycraft.api.v1.BalanceMutationStatus.MAX_BALANCE_EXCEEDED
-                    ? "Recipient cannot receive that much money"
-                    : "Not enough balance";
-            source.sendFailure(Component.literal(message).withStyle(ChatFormatting.RED));
-        }
-        return 1;
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildAddMoney() {
@@ -665,107 +527,6 @@ public final class EconomyCommands {
         return count;
     }
 
-    private static LiteralArgumentBuilder<CommandSourceStack> buildAuction(String command) {
-        return literal(command)
-                .requires(src -> EconomyConfig.get().auctionEnabled)
-                .executes(ctx -> openAuction(ctx.getSource().getPlayerOrException(), ctx.getSource()))
-                .then(literal("list")
-                        .executes(ctx -> usage(ctx.getSource(), "/" + command + " list <price> [<amount>]"))
-                        .then(argument("price", LongArgumentType.longArg(1, EconomyManager.MAX))
-                                .executes(ctx -> listAuctionItem(ctx.getSource().getPlayerOrException(),
-                                         LongArgumentType.getLong(ctx, "price"), -1,
-                                         ctx.getSource()))
-                                .then(argument("amount", IntegerArgumentType.integer(1))
-                                        .executes(ctx -> listAuctionItem(ctx.getSource().getPlayerOrException(),
-                                                 LongArgumentType.getLong(ctx, "price"),
-                                                 IntegerArgumentType.getInteger(ctx, "amount"),
-                                                 ctx.getSource())))))
-                .then(literal("search")
-                        .executes(ctx -> usage(ctx.getSource(), "/" + command + " search <query>"))
-                        .then(argument("query", StringArgumentType.greedyString())
-                                .executes(ctx -> searchAuction(ctx.getSource().getPlayerOrException(),
-                                         StringArgumentType.getString(ctx, "query"),
-                                         ctx.getSource()))));
-    }
-
-    private static int openAuction(ServerPlayer player, CommandSourceStack source) {
-        if (!EconomyConfig.get().auctionEnabled) {
-            source.sendFailure(Component.literal("The auction house is disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        try {
-            AuctionUi.open(player, EconomyCraft.getManager(source.getServer()).getAuctions());
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to open the auction house for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open auction house. Check server logs."));
-            return 0;
-        }
-    }
-
-    private static int searchAuction(ServerPlayer player, String query, CommandSourceStack source) {
-        if (!EconomyConfig.get().auctionEnabled) {
-            source.sendFailure(Component.literal("The auction house is disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        try {
-            AuctionUi.openSearch(player, EconomyCraft.getManager(source.getServer()).getAuctions(), query);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to search the auction house for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open auction house. Check server logs."));
-            return 0;
-        }
-    }
-
-    private static int listAuctionItem(ServerPlayer player, long price, int amount, CommandSourceStack source) {
-        if (!EconomyConfig.get().auctionEnabled) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("The auction house is disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        ItemStack hand = player.getMainHandItem();
-        if (hand.isEmpty()) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("Hold the item to list in your hand").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        int count = amount > 0 ? amount : Math.min(hand.getCount(), hand.getMaxStackSize());
-        if (count > hand.getCount()) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("You only have " + hand.getCount() + ".").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        AuctionManager auctions = EconomyCraft.getManager(source.getServer()).getAuctions();
-        if (auctions.hasReachedLimit(player.getUUID())) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("You have reached your limit of "
-                    + auctions.getEffectiveLimit(player.getUUID()) + " active listing(s).").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        AuctionListing listing = new AuctionListing();
-        listing.seller = player.getUUID();
-        listing.price = price;
-        listing.item = hand.copyWithCount(count);
-        listing.createdAt = System.currentTimeMillis();
-        listing.expiresAt = ExpirationUtil.expiresAt(listing.createdAt, EconomyConfig.get().auctionExpirationHours);
-        hand.shrink(count);
-        auctions.addListing(listing);
-
-        long tax = Math.round(price * EconomyConfig.get().taxRate);
-
-        Component msg = Component.literal("Listed item for " + EconomyCraft.formatMoney(price) +
-                        (tax > 0 ? " (buyers pay " + EconomyCraft.formatMoney(price + tax) + ")" : ""))
-                .withStyle(ChatFormatting.GREEN);
-
-        EconomySounds.success(player);
-        player.sendSystemMessage(msg);
-
-        return 1;
-    }
-
     private static LiteralArgumentBuilder<CommandSourceStack> buildShop() {
         return literal("shop")
                 .requires(src -> EconomyConfig.get().shopEnabled)
@@ -821,147 +582,27 @@ public final class EconomyCommands {
         }
     }
 
-    private static LiteralArgumentBuilder<CommandSourceStack> buildOrders(CommandBuildContext buildContext) {
-        String requestUsage = "/orders request <item> <amount> <price>";
-        return literal("orders")
-                .executes(ctx -> openOrders(ctx.getSource().getPlayerOrException(), ctx.getSource()))
-                .then(literal("request")
-                        .requires(src -> EconomyConfig.get().ordersEnabled)
-                        .executes(ctx -> usage(ctx.getSource(), requestUsage))
-                        .then(argument("item", ItemArgument.item(buildContext))
-                                .executes(ctx -> usage(ctx.getSource(), requestUsage))
-                                .then(argument("amount", LongArgumentType.longArg(1, EconomyManager.MAX))
-                                        .executes(ctx -> usage(ctx.getSource(), requestUsage))
-                                        .then(argument("price", LongArgumentType.longArg(1, EconomyManager.MAX))
-                                                .executes(ctx -> requestItem(ctx.getSource().getPlayerOrException(),
-                                                        ItemArgument.getItem(ctx, "item"),
-                                                        (int) Math.min(LongArgumentType.getLong(ctx, "amount"), EconomyManager.MAX),
-                                                        LongArgumentType.getLong(ctx, "price"),
-                                                        ctx.getSource()))))))
-                .then(literal("claim").executes(ctx -> claimOrders(ctx.getSource().getPlayerOrException(), ctx.getSource())))
-                .then(literal("search")
-                        .requires(src -> EconomyConfig.get().ordersEnabled)
-                        .executes(ctx -> usage(ctx.getSource(), "/orders search <query>"))
-                        .then(argument("query", StringArgumentType.greedyString())
-                                .executes(ctx -> searchOrders(ctx.getSource().getPlayerOrException(),
-                                        StringArgumentType.getString(ctx, "query"),
-                                        ctx.getSource()))));
-    }
-
-    private static int openOrders(ServerPlayer player, CommandSourceStack source) {
-        if (!EconomyConfig.get().ordersEnabled) {
-            source.sendFailure(Component.literal("Orders are disabled.").withStyle(ChatFormatting.RED));
+    private static int buyItem(CommandSourceStack source, String raw) {
+        ServerPlayer player = tryGetPlayer(source);
+        if (player == null) {
+            source.sendFailure(Component.literal("Only players can buy.").withStyle(ChatFormatting.RED));
             return 0;
         }
-        try {
-            OrdersUi.open(player, EconomyCraft.getManager(source.getServer()));
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to open /orders for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open orders. Check server logs."));
+        String id = raw == null ? "" : raw.trim();
+        int count = 1;
+        int space = id.lastIndexOf(' ');
+        if (space > 0) {
+            try {
+                count = Integer.parseInt(id.substring(space + 1).trim());
+                id = id.substring(0, space).trim();
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        if (id.isEmpty() || count < 1) {
+            source.sendFailure(Component.literal("Usage: /eco buy <item> [count]").withStyle(ChatFormatting.RED));
             return 0;
         }
-    }
-
-    private static int requestItem(ServerPlayer player, ItemInput input, int amount, long price, CommandSourceStack source) {
-        ItemStack item;
-        try {
-            item = ItemArgumentCompat.createItemStack(input, 1);
-        } catch (CommandSyntaxException e) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("Invalid item").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        EconomyManager eco = EconomyCraft.getManager(source.getServer());
-        OrderManager orders = eco.getOrders();
-        if (orders.hasReachedLimit(player.getUUID())) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("You have reached your limit of "
-                    + orders.getEffectiveLimit(player.getUUID()) + " active order request(s).").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        int maxAmount = MAIN_INVENTORY_SLOTS * item.getMaxStackSize();
-        if (amount > maxAmount) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("Amount exceeds " + MAIN_INVENTORY_SLOTS + " stacks (max " + maxAmount + ")").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        OrderRequest r = OrderFulfillment.createEscrowedRequest(eco, player.getUUID(), item, amount, price);
-        if (r == null) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("You can't afford to reserve " + EconomyCraft.formatMoney(price)).withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        long tax = Math.round(price * EconomyConfig.get().taxRate);
-
-        Component msg = Component.literal("Created request" +
-                (tax > 0 ? " (fulfiller receives " + EconomyCraft.formatMoney(price - tax) + ")" : ""))
-                .withStyle(ChatFormatting.GREEN);
-        EconomySounds.success(player);
-        player.sendSystemMessage(msg);
-
-        return 1;
-    }
-
-    private static int claimOrders(ServerPlayer player, CommandSourceStack source) {
-        OrdersUi.openClaims(player, EconomyCraft.getManager(source.getServer()));
-        return 1;
-    }
-
-    private static int searchOrders(ServerPlayer player, String query, CommandSourceStack source) {
-        if (!EconomyConfig.get().ordersEnabled) {
-            source.sendFailure(Component.literal("Orders are disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        try {
-            OrdersUi.openSearch(player, EconomyCraft.getManager(source.getServer()), query);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to search /orders for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open orders. Check server logs."));
-            return 0;
-        }
-    }
-
-    private static LiteralArgumentBuilder<CommandSourceStack> buildDaily() {
-        return literal("daily")
-                .executes(ctx -> daily(ctx.getSource().getPlayerOrException(), ctx.getSource()));
-    }
-
-    private static int daily(ServerPlayer player, CommandSourceStack source) {
-        EconomyManager manager = EconomyCraft.getManager(source.getServer());
-        boolean alreadyClaimed = manager.hasClaimedDailyToday(player.getUUID());
-        if (manager.claimDaily(player.getUUID())) {
-            EconomySounds.dailyReward(player);
-            Component msg = Component.literal("Claimed " + EconomyCraft.formatMoney(EconomyConfig.get().dailyAmount))
-                    .withStyle(ChatFormatting.GREEN);
-            player.sendSystemMessage(msg);
-        } else if (alreadyClaimed) {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("Already claimed today").withStyle(ChatFormatting.RED));
-        } else {
-            EconomySounds.failure(player);
-            source.sendFailure(Component.literal("Daily reward could not be added to your balance")
-                    .withStyle(ChatFormatting.RED));
-        }
-        return 1;
-    }
-
-    private static LiteralArgumentBuilder<CommandSourceStack> buildTransactions() {
-        return literal("transactions")
-                .executes(ctx -> openTransactions(ctx.getSource().getPlayerOrException(), ctx.getSource()));
-    }
-
-    private static int openTransactions(ServerPlayer player, CommandSourceStack source) {
-        try {
-            TransactionsUi.open(player);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to open /transactions for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open transactions. Check server logs."));
-            return 0;
-        }
+        return ShopUi.buy(player, id, count);
     }
 
     @Nullable
@@ -1007,7 +648,7 @@ public final class EconomyCommands {
 
     private static CompletableFuture<Suggestions> suggestShopCategories(CommandSourceStack source, SuggestionsBuilder builder) {
         PriceRegistry prices = EconomyCraft.getManager(source.getServer()).getPrices();
-        for (String cat : prices.buyCategories()) {
+        for (String cat : ShopDisplay.displayCategories(prices)) {
             builder.suggest(cat);
         }
         return builder.buildFuture();

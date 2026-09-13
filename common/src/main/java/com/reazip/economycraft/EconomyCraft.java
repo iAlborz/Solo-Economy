@@ -19,12 +19,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public final class EconomyCraft {
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -94,16 +98,29 @@ public final class EconomyCraft {
 
             eco.markActive(player.getUUID());
             eco.getNotifications().sendPending(player);
-
-            if (eco.getDeliveries().hasDeliveries(player.getUUID())) {
-                sendPrompt(player, "You have unclaimed items: ", "[Claim]", "/eco orders claim");
-            }
+            flushDeliveries(player, eco);
 
             if (EconomyPaths.hasSharedFolder(server)) {
                 sendPrompt(player, "Found an older EconomyCraft setup. ", "[Import]", "/eco import");
             }
         } catch (Exception e) {
             LOGGER.error("[EconomyCraft] Failed to set up {} on join", player.getName().getString(), e);
+        }
+    }
+
+    private static void flushDeliveries(ServerPlayer player, EconomyManager eco) {
+        DeliveryManager deliveries = eco.getDeliveries();
+        UUID id = player.getUUID();
+        if (!deliveries.hasDeliveries(id)) return;
+
+        List<ItemStack> waiting = new ArrayList<>(deliveries.getDeliveries(id));
+        for (ItemStack stack : waiting) {
+            ItemStack leftover = stack.copy();
+            player.getInventory().add(leftover);
+            if (!leftover.isEmpty()) {
+                player.drop(leftover, false);
+            }
+            deliveries.removeDelivery(id, stack);
         }
     }
 

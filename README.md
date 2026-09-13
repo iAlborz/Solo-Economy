@@ -1,36 +1,32 @@
-# EconomyCraft
+# Solo Economy
 
-A server-side economy for Fabric and NeoForge.
+A solo survival shop and money system for Fabric (and NeoForge).
 Requires Architectury API.
+
+Based on [EconomyCraft](https://github.com/PhilipB06/EconomyCraft) by ReaZip.
 
 ---
 
 ## Setup
 
-1. Put the jar in your server's `mods` folder and start the server.
-2. Type `/eco` in game to open the menu.
-3. Operators get an **Admin** button in that menu, or can run `/eco admin`.
+1. Put the jar in your instance `mods` folder with Fabric API and Architectury API.
+2. Open inventory or a crafting table, open the recipe book, and click the yellow bag next to Search, or type `/eco`.
+3. Operators can run `/eco admin`.
 
 Default configuration works without manual changes.
 
 ---
 
-## The `/eco` menu
+## The shop
 
-| Button            | Description                                                                                                                                                                                  |
+Open inventory or a crafting table, then open the recipe book. Next to Search are **check** (craftable only), **X** (all recipes), and the **yellow bag** (shop). Shop mode shows buyable items in the recipe grid; the category card sits to the left of the book. The card on the right is balance plus **Insta Sell**.
+
+| Control           | Description                                                                                                                                                                                  |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Shop**          | Buy and sell at fixed prices with unlimited stock. Type in the title-bar search field to filter items as you type. Left click buys, right click sells, shift-click uses the bulk amount. The compass still opens the older type-and-confirm search. |
-| **Auction House** | Buy items other players have listed. Search listings from the title bar. **Sell an item** walks through picking an item and setting a price.                                                                                     |
-| **Sell Items**    | Put items in the slots, check the total, confirm. Items without a sell price will not fit, and closing without confirming returns everything.                                                |
-| **Orders**        | **New request** picks any item in the game, an amount and a price. Search requests from the title bar. Other players fill the request and get paid.                                                                              |
-| **Daily Reward**  | Claims the daily payout, once per day.                                                                                                                                                       |
-| **Pay a Player**  | Select a player and an amount. Search players from the title bar.                                                                                                                                                               |
-| **Top Balances**  | The richest players on the server.                                                                                                                                                           |
-| **Item Value**    | The buy and sell price of any item.                                                                                                                                                          |
-| **Deliveries**    | Items bought while the inventory was full or orders that have been completed while being offline.                                                                                            |
-| **Transactions**  | Your recent balance history, newest first. Hover an entry for the full detail: type, amount, and date. Admins viewing another player's history also see the balance before/after each entry. |
+| **Insta Sell**    | Drop a stack on the slot to sell it at the shop sell price.                                                                                                                                 |
+| **Shop**          | Recipe-book grid of buyable items. Type in the book's search box to filter. Left click buys 1, shift-click buys a stack. Categories are on the left card. |
 
-Each screen also has a command: `/bal`, `/bal top`, `/pay`, `/daily`, `/shop`, `/ah`, `/auction`, `/sell`, `/worth`, `/orders`, `/orders claim`, `/transactions`.
+Commands: `/eco` and `/shop` open inventory with the recipe book already in Shop mode. `/sell` still opens the chest sell menu. `/bal` and `/worth` still work. `/eco admin` is for operators.
 
 ---
 
@@ -90,12 +86,12 @@ In singleplayer each world gets that same folder inside its own save, at `saves/
 | `dailySellLimit`                 | `10000` | Most a player can earn per day from selling. `0` disables the limit.                                                            |
 | `taxRate`                        | `0.1`   | Tax on trades and orders, as a decimal (`0.1` = 10%).                                                                           |
 | `pvp_balance_loss_percentage`    | `0`     | Share of a balance the killer takes on a PvP death. `0` disables it.                                                            |
-| `standalone_commands`            | `true`  | Allow `/pay`, `/daily` and similar without the `/eco` prefix.                                                                   |
+| `standalone_commands`            | `true`  | Allow `/shop`, `/sell` and similar without the `/eco` prefix.                                                                   |
 | `standalone_admin_commands`      | `false` | Allow `/addmoney`, `/setmoney` and similar without the `/eco` prefix.                                                           |
-| `scoreboard_enabled`             | `true`  | Show the balance sidebar.                                                                                                       |
+| `scoreboard_enabled`             | `false` | Show the balance sidebar. Off in this local edition.                                                                            |
 | `shop_enabled`                   | `true`  | Enable the fixed-price shop.                                                                                                    |
-| `auction_enabled`                | `true`  | Enable the auction house.                                                                                                       |
-| `orders_enabled`                 | `true`  | Enable the orders board. Collecting deliveries works either way.                                                                |
+| `auction_enabled`                | `false` | Enable the auction house. Off in this local edition.                                                                            |
+| `orders_enabled`                 | `false` | Enable the orders board. Collecting deliveries works either way. Off in this local edition.                                     |
 | `sell_enabled`                   | `true`  | Enable selling.                                                                                                                 |
 | `worth_enabled`                  | `true`  | Enable item value lookups through `/worth` and the `/eco` menu.                                                                 |
 | `balance_separator`              | `"."`   | Thousands separator. Only the first character is used, so `","` gives `$1,000`.                                                 |

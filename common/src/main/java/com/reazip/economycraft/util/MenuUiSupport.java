@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.ReferenceSortedSets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -56,6 +58,7 @@ public final class MenuUiSupport {
     private static final int GRID_LEFT = 8;
     private static final int GRID_TOP = 18;
     private static final int CONFIRM_ROW_Y = 20;
+    private static final @Nullable DataComponentType<?> ITEM_MODEL = itemModelComponent();
 
     public static void openMenu(ServerPlayer player, String title, BiFunction<Integer, Inventory, AbstractContainerMenu> factory) {
         player.openMenu(new MenuProvider() {
@@ -107,11 +110,30 @@ public final class MenuUiSupport {
     }
 
     public static ItemStack cancelButton() {
-        return button(ItemsCompat.redStainedGlassPane(), "Cancel", ChatFormatting.DARK_RED);
+        return withGuiIcon(button(ItemsCompat.redStainedGlassPane(), "Cancel", ChatFormatting.DARK_RED), "cancel");
     }
 
     public static ItemStack confirmButton(String name, Component... lore) {
-        return button(ItemsCompat.limeStainedGlassPane(), name, ChatFormatting.GREEN, lore);
+        return withGuiIcon(button(ItemsCompat.limeStainedGlassPane(), name, ChatFormatting.GREEN, lore), "confirm");
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static ItemStack withGuiIcon(ItemStack stack, String icon) {
+        if (ITEM_MODEL == null) return stack;
+        IdentifierCompat.Id id = IdentifierCompat.fromNamespaceAndPath("economycraft", icon);
+        if (id == null) return stack;
+        stack.set((DataComponentType) ITEM_MODEL, id.handle());
+        return stack;
+    }
+
+    private static @Nullable DataComponentType<?> itemModelComponent() {
+        try {
+            Field field = DataComponents.class.getField("ITEM_MODEL");
+            Object value = field.get(null);
+            return value instanceof DataComponentType<?> type ? type : null;
+        } catch (ReflectiveOperationException ignored) {
+            return null;
+        }
     }
 
     public static ItemStack prevPageButton() {

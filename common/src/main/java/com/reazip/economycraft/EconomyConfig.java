@@ -35,13 +35,13 @@ public class EconomyConfig {
     @SerializedName("shop_enabled")
     public boolean shopEnabled = true;
     @SerializedName("auction_enabled")
-    public boolean auctionEnabled = true;
+    public boolean auctionEnabled = false;
     @SerializedName("sell_enabled")
     public boolean sellEnabled = true;
     @SerializedName("worth_enabled")
     public boolean worthEnabled = true;
     @SerializedName("orders_enabled")
-    public boolean ordersEnabled = true;
+    public boolean ordersEnabled = false;
     @SerializedName("balance_separator")
     public String balanceSeparator = ".";
     @SerializedName("transaction_log_enabled")

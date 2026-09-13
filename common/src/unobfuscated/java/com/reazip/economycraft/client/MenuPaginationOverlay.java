@@ -72,6 +72,7 @@ public final class MenuPaginationOverlay {
     private static @Nullable PageState cached;
     private static @Nullable Integer cachedBackSlot;
     private static boolean shiftedSlots;
+    private static boolean shiftedTitle;
     private static double savedMouseX;
     private static double savedMouseY;
     private static long savedMouseAt;
@@ -106,6 +107,7 @@ public final class MenuPaginationOverlay {
         cached = null;
         cachedBackSlot = null;
         shiftedSlots = false;
+        shiftedTitle = false;
 
         gapPanel = new GapPanel(left, gapY);
         gapPanel.visible = false;
@@ -176,7 +178,10 @@ public final class MenuPaginationOverlay {
 
         if (cachedBackSlot == null) {
             menuBackButton.visible = false;
-            setInt(TITLE_LABEL_X, container, TITLE_X);
+            if (shiftedTitle) {
+                setInt(TITLE_LABEL_X, container, TITLE_X);
+                shiftedTitle = false;
+            }
             return;
         }
 
@@ -185,7 +190,10 @@ public final class MenuPaginationOverlay {
         menuBackButton.setY(top);
         menuBackButton.visible = true;
         menuBackButton.active = true;
-        if (shiftTitle) setInt(TITLE_LABEL_X, container, TITLE_X + MENU_BACK_WIDTH + TITLE_GAP);
+        if (shiftTitle) {
+            setInt(TITLE_LABEL_X, container, TITLE_X + MENU_BACK_WIDTH + TITLE_GAP);
+            shiftedTitle = true;
+        }
     }
 
     private static void refreshPages(Screen screen, AbstractContainerScreen<?> container) {
@@ -360,7 +368,11 @@ public final class MenuPaginationOverlay {
         if (expected == null && !name.startsWith("Page ") && !"Previous page".equals(name) && !"Next page".equals(name)) {
             return;
         }
-        screen.getMenu().getSlot(slot).set(MenuUiSupport.filler());
+        screen.getMenu().getSlot(slot).set(hideAsEmpty(screen) ? ItemStack.EMPTY : MenuUiSupport.filler());
+    }
+
+    private static boolean hideAsEmpty(AbstractContainerScreen<?> screen) {
+        return screen.getMenu().slots.size() - 36 == 45;
     }
 
     private static void setInt(@Nullable Field field, Object target, int value) {

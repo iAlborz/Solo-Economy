@@ -361,6 +361,19 @@ public final class PriceRegistry {
         return byCategory(category, this::isBuyable);
     }
 
+    public List<PriceEntry> buyableInTree(String category) {
+        if (category == null) return List.of();
+        String root = category.trim().toLowerCase(Locale.ROOT);
+        if (root.isBlank()) return List.of();
+        List<PriceEntry> out = new ArrayList<>();
+        for (PriceEntry p : entries(this::isBuyable)) {
+            if (p.category() == null) continue;
+            String cat = p.category().trim().toLowerCase(Locale.ROOT);
+            if (cat.equals(root) || cat.startsWith(root + ".")) out.add(p);
+        }
+        return out;
+    }
+
     public List<PriceEntry> search(String query, @Nullable String category) {
         return search(query, category, this::isBuyable);
     }
@@ -446,6 +459,15 @@ public final class PriceRegistry {
         if (key == null) return null;
         for (PriceEntry p : entries(ANY)) {
             if (key.equals(p.key())) return p;
+        }
+        return null;
+    }
+
+    public @Nullable PriceEntry findBuyable(String id) {
+        if (id == null || id.isBlank()) return null;
+        String key = id.trim();
+        for (PriceEntry p : entries(this::isBuyable)) {
+            if (key.equals(p.key()) || key.equals(p.id().asString())) return p;
         }
         return null;
     }
