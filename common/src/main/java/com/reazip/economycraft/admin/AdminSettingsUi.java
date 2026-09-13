@@ -74,10 +74,7 @@ public final class AdminSettingsUi {
         SHOP("Shop", "The built-in shop with fixed prices."),
         AUCTION("Auction House", "The marketplace players list their own items on."),
         ORDERS("Orders", "The request board players post wanted items on."),
-        SELL("Selling", "The /sell menu and right-click selling."),
-        WORTH("Item Values", "The /worth command and Item Value menu."),
-        STANDALONE("Short Commands", "Allow /pay, /shop and /ah without the /eco prefix."),
-        STANDALONE_ADMIN("Short Admin Commands", "Allow /addmoney without the /eco prefix."),
+        SELL("Selling", "Insta Sell in the crafting menu."),
         TRANSACTION_LOG("Transaction Logs", "Record every balance change to a daily log file."),
         TRANSACTION_LOG_RETENTION("Log Retention", "How many days of transaction logs to keep before deleting them."),
         DYNAMIC_PRICES("Dynamic Prices", "Scale shop buy prices with the active-player median balance."),
@@ -170,9 +167,6 @@ public final class AdminSettingsUi {
                 case AUCTION -> toggleItem(setting, config.auctionEnabled);
                 case ORDERS -> toggleItem(setting, config.ordersEnabled);
                 case SELL -> toggleItem(setting, config.sellEnabled);
-                case WORTH -> toggleItem(setting, config.worthEnabled);
-                case STANDALONE -> toggleItem(setting, config.standaloneCommands);
-                case STANDALONE_ADMIN -> toggleItem(setting, config.standaloneAdminCommands);
                 case TRANSACTION_LOG -> toggleItem(setting, config.transactionLogEnabled);
                 case TRANSACTION_LOG_RETENTION -> valueItem(setting, Items.MAP, days(config.transactionLogRetentionDays));
                 case DYNAMIC_PRICES -> dynamicPricesItem(config);
@@ -419,21 +413,6 @@ public final class AdminSettingsUi {
                 }
                 case SELL -> {
                     config.sellEnabled = !config.sellEnabled;
-                    save(viewer);
-                    render();
-                }
-                case WORTH -> {
-                    config.worthEnabled = !config.worthEnabled;
-                    save(viewer);
-                    render();
-                }
-                case STANDALONE -> {
-                    config.standaloneCommands = !config.standaloneCommands;
-                    save(viewer);
-                    render();
-                }
-                case STANDALONE_ADMIN -> {
-                    config.standaloneAdminCommands = !config.standaloneAdminCommands;
                     save(viewer);
                     render();
                 }

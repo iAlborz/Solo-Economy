@@ -3,94 +3,45 @@ package com.reazip.economycraft;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.suggestion.Suggestions;
-import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.mojang.logging.LogUtils;
 import com.reazip.economycraft.admin.AdminUi;
+import com.reazip.economycraft.shop.ShopUi;
 import com.reazip.economycraft.util.AsyncFileWriter;
 import com.reazip.economycraft.util.EconomyPaths;
-import com.reazip.economycraft.util.EconomySounds;
 import com.reazip.economycraft.util.IdentityCompat;
 import com.reazip.economycraft.util.LiveSearchable;
 import com.reazip.economycraft.util.PermissionCompat;
 import net.minecraft.ChatFormatting;
-import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.GameProfileArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.util.*;
-
-import java.util.concurrent.CompletableFuture;
-import com.reazip.economycraft.shop.ShopDisplay;
-import com.reazip.economycraft.shop.ShopUi;
+import java.util.Collection;
+import java.util.UUID;
 
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
-import org.jetbrains.annotations.Nullable;
-
 public final class EconomyCommands {
     private static final Logger LOGGER = LogUtils.getLogger();
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext,
+
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher,
                                 Commands.CommandSelection selection) {
         dispatcher.register(buildRoot(
-                buildContext,
                 selection,
                 buildAddMoney(),
                 buildSetMoney(),
                 buildRemoveMoney(),
                 buildRemovePlayer()
         ));
-
-        dispatcher.register(buildBalance().requires(s -> EconomyConfig.get().standaloneCommands));
-        dispatcher.register(SellCommand.register().requires(s -> EconomyConfig.get().standaloneCommands && EconomyConfig.get().sellEnabled));
-        registerStandalone(dispatcher, buildShop());
-        dispatcher.register(WorthCommand.register(buildContext).requires(s ->
-                EconomyConfig.get().standaloneCommands && EconomyConfig.get().worthEnabled));
-
-        dispatcher.register(
-                buildAddMoney().requires(src ->
-                        PermissionCompat.gamemaster().test(src)
-                                && EconomyConfig.get().standaloneAdminCommands
-                )
-        );
-
-        dispatcher.register(
-                buildSetMoney().requires(src ->
-                        PermissionCompat.gamemaster().test(src)
-                                && EconomyConfig.get().standaloneAdminCommands
-                )
-        );
-
-        dispatcher.register(
-                buildRemoveMoney().requires(src ->
-                        PermissionCompat.gamemaster().test(src)
-                                && EconomyConfig.get().standaloneAdminCommands
-                )
-        );
-
-        dispatcher.register(
-                buildRemovePlayer().requires(src ->
-                        PermissionCompat.gamemaster().test(src)
-                                && EconomyConfig.get().standaloneAdminCommands
-                )
-        );
-
-    }
-
-    private static void registerStandalone(CommandDispatcher<CommandSourceStack> dispatcher,
-                                           LiteralArgumentBuilder<CommandSourceStack> command) {
-        command.requires(command.getRequirement().and(src -> EconomyConfig.get().standaloneCommands));
-        dispatcher.register(command);
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildRoot(
-            CommandBuildContext buildContext,
             Commands.CommandSelection selection,
             LiteralArgumentBuilder<CommandSourceStack> addMoney,
             LiteralArgumentBuilder<CommandSourceStack> setMoney,
@@ -99,16 +50,9 @@ public final class EconomyCommands {
     ) {
         LiteralArgumentBuilder<CommandSourceStack> root = literal("eco");
 
-        root.executes(ctx -> openHub(ctx.getSource()));
-        root.then(literal("menu").executes(ctx -> openHub(ctx.getSource())));
         root.then(literal("admin").requires(PermissionCompat.gamemaster())
                 .executes(ctx -> openAdmin(ctx.getSource())));
-
-        root.then(buildBalance());
-        root.then(SellCommand.register().requires(s -> EconomyConfig.get().sellEnabled));
         root.then(SellCommand.registerInstaSell().requires(s -> EconomyConfig.get().sellEnabled));
-        root.then(buildShop());
-        root.then(WorthCommand.register(buildContext).requires(s -> EconomyConfig.get().worthEnabled));
         root.then(literal("search")
                 .executes(ctx -> applyLiveSearch(ctx.getSource(), ""))
                 .then(argument("query", StringArgumentType.greedyString())
@@ -169,22 +113,6 @@ public final class EconomyCommands {
         return LiveSearchable.apply(player, query) ? 1 : 0;
     }
 
-    private static int openHub(CommandSourceStack source) {
-        ServerPlayer player = tryGetPlayer(source);
-        if (player == null) {
-            source.sendFailure(Component.literal("Only players can open the menu.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        try {
-            HubUi.open(player);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to open the menu for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open the menu. Check server logs."));
-            return 0;
-        }
-    }
-
     private static int openAdmin(CommandSourceStack source) {
         ServerPlayer player = tryGetPlayer(source);
         if (player == null) {
@@ -201,19 +129,6 @@ public final class EconomyCommands {
         }
     }
 
-    private static LiteralArgumentBuilder<CommandSourceStack> buildBalance() {
-        return literal("bal")
-                .executes(ctx -> showBalance(IdentityCompat.of(ctx.getSource().getPlayerOrException()), ctx.getSource()))
-                .then(argument("target", StringArgumentType.word())
-                        .suggests((ctx, builder) -> suggestPlayers(ctx.getSource(), builder))
-                        .executes(ctx -> showBalance(StringArgumentType.getString(ctx, "target"), ctx.getSource())));
-    }
-
-    private static int usage(CommandSourceStack source, String usage) {
-        source.sendFailure(Component.literal("Usage: " + usage).withStyle(ChatFormatting.RED));
-        return 0;
-    }
-
     private static @Nullable Long parseAmount(CommandSourceStack source, String raw, long min, long max) {
         Long amount = EconomyCraft.parseMoneyShort(raw);
         if (amount == null) {
@@ -227,47 +142,6 @@ public final class EconomyCommands {
             return null;
         }
         return amount;
-    }
-
-    private static int showBalance(IdentityCompat.PlayerRef target, CommandSourceStack source) {
-        EconomyManager manager = EconomyCraft.getManager(source.getServer());
-        Long bal = manager.getBalance(target.id(), false);
-        if (bal == null) {
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        ServerPlayer executor = tryGetPlayer(source);
-
-        Component msg;
-        if (executor != null && executor.getUUID().equals(target.id())) {
-            msg = Component.literal("Balance: " + EconomyCraft.formatMoney(bal))
-                    .withStyle(ChatFormatting.YELLOW);
-        } else {
-            msg = Component.literal(target.name() + "'s balance: " + EconomyCraft.formatMoney(bal))
-                    .withStyle(ChatFormatting.YELLOW);
-        }
-
-        reply(source, executor, msg, false);
-
-        return 1;
-    }
-
-    private static int showBalance(String targetName, CommandSourceStack source) {
-        EconomyManager manager = EconomyCraft.getManager(source.getServer());
-        UUID targetId = manager.tryResolveUuidByName(targetName);
-        if (targetId == null) {
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        if (manager.getBalance(targetId, false) == null) {
-            source.sendFailure(Component.literal("Unknown player").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-
-        String resolvedName = manager.getBestName(targetId);
-        return showBalance(new IdentityCompat.PlayerRef(targetId,
-                resolvedName == null || resolvedName.isBlank() ? targetName : resolvedName), source);
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildAddMoney() {
@@ -527,61 +401,6 @@ public final class EconomyCommands {
         return count;
     }
 
-    private static LiteralArgumentBuilder<CommandSourceStack> buildShop() {
-        return literal("shop")
-                .requires(src -> EconomyConfig.get().shopEnabled)
-                .executes(ctx -> openShop(ctx.getSource().getPlayerOrException(), ctx.getSource(), null))
-                .then(argument("category", StringArgumentType.greedyString())
-                        .suggests((ctx, builder) -> suggestShopCategories(ctx.getSource(), builder))
-                        .executes(ctx -> openShop(
-                                ctx.getSource().getPlayerOrException(),
-                                ctx.getSource(),
-                                StringArgumentType.getString(ctx, "category")
-                        )))
-                .then(literal("search")
-                        .executes(ctx -> {
-                            ServerPlayer player = ctx.getSource().getPlayerOrException();
-                            if (ShopUi.clearLiveSearch(player)) return 1;
-                            return usage(ctx.getSource(), "/shop search <query>");
-                        })
-                        .then(argument("query", StringArgumentType.greedyString())
-                                .executes(ctx -> searchShop(ctx.getSource().getPlayerOrException(),
-                                        StringArgumentType.getString(ctx, "query"),
-                                        ctx.getSource()))));
-    }
-
-    private static int openShop(ServerPlayer player, CommandSourceStack source, @Nullable String category) {
-        if (!EconomyConfig.get().shopEnabled) {
-            source.sendFailure(Component.literal("Shop is disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        EconomyManager manager = EconomyCraft.getManager(source.getServer());
-        try {
-            ShopUi.open(player, manager, category);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to open /shop for {} (category={})",
-                    player.getDisplayName().getString(), category, e);
-            source.sendFailure(Component.literal("Failed to open shop. Check server logs."));
-            return 0;
-        }
-    }
-
-    private static int searchShop(ServerPlayer player, String query, CommandSourceStack source) {
-        if (!EconomyConfig.get().shopEnabled) {
-            source.sendFailure(Component.literal("Shop is disabled.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        try {
-            ShopUi.applyLiveSearch(player, EconomyCraft.getManager(source.getServer()), query);
-            return 1;
-        } catch (Exception e) {
-            LOGGER.error("[EconomyCraft] Failed to search /shop for {}", player.getDisplayName().getString(), e);
-            source.sendFailure(Component.literal("Failed to open shop. Check server logs."));
-            return 0;
-        }
-    }
-
     private static int buyItem(CommandSourceStack source, String raw) {
         ServerPlayer player = tryGetPlayer(source);
         if (player == null) {
@@ -620,37 +439,5 @@ public final class EconomyCommands {
         } else {
             source.sendSuccess(() -> msg, broadcastToOps);
         }
-    }
-
-    private static CompletableFuture<Suggestions> suggestPlayers(CommandSourceStack source, SuggestionsBuilder builder) {
-        var server = source.getServer();
-        var manager = EconomyCraft.getManager(server);
-        Set<String> suggestions = new HashSet<>();
-
-        for (ServerPlayer p : server.getPlayerList().getPlayers()) {
-            suggestions.add(IdentityCompat.of(p).name());
-        }
-
-        for (UUID id : manager.getBalances().keySet()) {
-            String name = manager.getBestName(id);
-            if (name != null && !name.isBlank()) {
-                suggestions.add(name);
-            }
-        }
-
-        String typed = builder.getRemainingLowerCase();
-        suggestions.stream()
-                .filter(name -> name.toLowerCase(Locale.ROOT).startsWith(typed))
-                .sorted(String.CASE_INSENSITIVE_ORDER)
-                .forEach(builder::suggest);
-        return builder.buildFuture();
-    }
-
-    private static CompletableFuture<Suggestions> suggestShopCategories(CommandSourceStack source, SuggestionsBuilder builder) {
-        PriceRegistry prices = EconomyCraft.getManager(source.getServer()).getPrices();
-        for (String cat : ShopDisplay.displayCategories(prices)) {
-            builder.suggest(cat);
-        }
-        return builder.buildFuture();
     }
 }

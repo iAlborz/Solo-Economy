@@ -14,8 +14,8 @@ Based on [EconomyCraft](https://github.com/PhilipB06/EconomyCraft) by ReaZip.
 ## Setup
 
 1. Put the jar in your instance `mods` folder with Fabric API and Architectury API.
-2. Open inventory or a crafting table, open the recipe book, and click the yellow bag next to Search, or type `/eco`.
-3. Operators can run `/eco admin`.
+2. Open inventory or a crafting table, open the recipe book, and click the yellow bag next to Search.
+3. Operators can run `/eco admin` to edit the shop, settings, and balances.
 
 Default configuration works without manual changes.
 
@@ -30,7 +30,7 @@ Open inventory or a crafting table, then open the recipe book. Next to Search ar
 | **Insta Sell**    | Drop a stack on the slot to sell it at the shop sell price.                                                                                                                                 |
 | **Shop**          | Recipe-book grid of buyable items. Type in the book's search box to filter. Left click buys 1, shift-click buys a stack. Categories are on the left card. |
 
-Commands: `/eco` and `/shop` open inventory with the recipe book already in Shop mode. `/sell` still opens the chest sell menu. `/bal` and `/worth` still work. `/eco admin` is for operators.
+Balance is always on the right card. There is no `/eco`, `/shop`, `/bal`, `/sell`, or `/worth` command.
 
 ---
 
@@ -62,15 +62,15 @@ Opt out a whole category from its category editor, or a single item from its ite
 
 ### Settings
 
-Paginated, and covers every option in `config.json`: starting balance, daily reward, daily sell limit, tax rate, PvP money loss, thousands separator, log retention, order/auction expiration hours, max active orders/auctions per player, dynamic shop pricing, and switches for the shop, auction house, orders, selling, the balance sidebar, the short command aliases and transaction logging.
+Paginated, and covers every option in `config.json`: starting balance, daily reward, daily sell limit, tax rate, PvP money loss, thousands separator, log retention, order/auction expiration hours, max active orders/auctions per player, dynamic shop pricing, and switches for the shop, auction house, orders, selling, the balance sidebar and transaction logging.
 
 ### Players
 
 Select any player, online or not, to give, take or set their balance, remove them from the economy, or override their max active orders / max active auctions. Right-click either limit to clear the override and fall back to the server default.
 
-### Admin commands
+### Admin
 
-`/eco addmoney`, `/eco setmoney`, `/eco removemoney`, `/eco removeplayer`.
+`/eco admin` opens the shop editor, settings, and player balances. Operators can also use `/eco addmoney`, `/eco setmoney`, `/eco removemoney`, and `/eco removeplayer`.
 
 ---
 
@@ -90,14 +90,11 @@ In singleplayer each world gets that same folder inside its own save, at `saves/
 | `dailySellLimit`                 | `10000` | Most a player can earn per day from selling. `0` disables the limit.                                                            |
 | `taxRate`                        | `0.1`   | Tax on trades and orders, as a decimal (`0.1` = 10%).                                                                           |
 | `pvp_balance_loss_percentage`    | `0`     | Share of a balance the killer takes on a PvP death. `0` disables it.                                                            |
-| `standalone_commands`            | `true`  | Allow `/shop`, `/sell` and similar without the `/eco` prefix.                                                                   |
-| `standalone_admin_commands`      | `false` | Allow `/addmoney`, `/setmoney` and similar without the `/eco` prefix.                                                           |
 | `scoreboard_enabled`             | `false` | Show the balance sidebar. Off in this local edition.                                                                            |
 | `shop_enabled`                   | `true`  | Enable the fixed-price shop.                                                                                                    |
 | `auction_enabled`                | `false` | Enable the auction house. Off in this local edition.                                                                            |
 | `orders_enabled`                 | `false` | Enable the orders board. Collecting deliveries works either way. Off in this local edition.                                     |
-| `sell_enabled`                   | `true`  | Enable selling.                                                                                                                 |
-| `worth_enabled`                  | `true`  | Enable item value lookups through `/worth` and the `/eco` menu.                                                                 |
+| `sell_enabled`                   | `true`  | Enable Insta Sell.                                                                                                              |
 | `balance_separator`              | `"."`   | Thousands separator. Only the first character is used, so `","` gives `$1,000`.                                                 |
 | `transaction_log_enabled`        | `true`  | Record every balance change to a daily log file.                                                                                |
 | `transaction_log_retention_days` | `7`     | How many days of transaction logs to keep.                                                                                      |

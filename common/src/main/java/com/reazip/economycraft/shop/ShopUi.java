@@ -7,8 +7,6 @@ import com.reazip.economycraft.EconomySources;
 import com.reazip.economycraft.PriceRegistry;
 import com.reazip.economycraft.SellService;
 import com.reazip.economycraft.util.EconomySounds;
-import com.reazip.economycraft.util.LiveSearchable;
-import com.reazip.economycraft.util.MenuUiSupport;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +20,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class ShopUi {
-    public static final int SEARCH_QUERY_MAX_LENGTH = MenuUiSupport.SEARCH_QUERY_MAX_LENGTH;
     private static final Map<UUID, Pending> PENDING = new ConcurrentHashMap<>();
 
     private ShopUi() {}
@@ -46,27 +43,6 @@ public final class ShopUi {
 
     public static void open(ServerPlayer player, EconomyManager eco) {
         requestOpen(player, null);
-    }
-
-    public static void open(ServerPlayer player, EconomyManager eco, @Nullable String category) {
-        requestOpen(player, category);
-    }
-
-    public static void applyLiveSearch(ServerPlayer player, EconomyManager eco, String query) {
-        String trimmed = query == null ? "" : query.trim();
-        if (trimmed.length() > SEARCH_QUERY_MAX_LENGTH) {
-            trimmed = trimmed.substring(0, SEARCH_QUERY_MAX_LENGTH);
-        }
-        if (LiveSearchable.apply(player, trimmed)) return;
-        if (trimmed.isEmpty()) {
-            requestOpen(player, null);
-            return;
-        }
-        requestOpen(player, null, trimmed);
-    }
-
-    public static boolean clearLiveSearch(ServerPlayer player) {
-        return LiveSearchable.apply(player, "");
     }
 
     public static int buy(ServerPlayer player, String id, int amount) {

@@ -46,7 +46,7 @@ public final class EconomyCraft {
         LifecycleEvent.SERVER_STARTING.register(WebhookConfig::load);
 
         CommandRegistrationEvent.EVENT.register((dispatcher, registry, selection) -> {
-            EconomyCommands.register(dispatcher, registry, selection);
+            EconomyCommands.register(dispatcher, selection);
         });
 
         LifecycleEvent.SERVER_STARTED.register(EconomyCraft::getManager);

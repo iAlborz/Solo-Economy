@@ -26,10 +26,6 @@ public class EconomyConfig {
     public double taxRate;
     @SerializedName("pvp_balance_loss_percentage")
     public double pvpBalanceLossPercentage;
-    @SerializedName("standalone_commands")
-    public boolean standaloneCommands;
-    @SerializedName("standalone_admin_commands")
-    public boolean standaloneAdminCommands;
     @SerializedName("scoreboard_enabled")
     public boolean scoreboardEnabled;
     @SerializedName("shop_enabled")
@@ -38,8 +34,6 @@ public class EconomyConfig {
     public boolean auctionEnabled = false;
     @SerializedName("sell_enabled")
     public boolean sellEnabled = true;
-    @SerializedName("worth_enabled")
-    public boolean worthEnabled = true;
     @SerializedName("orders_enabled")
     public boolean ordersEnabled = false;
     @SerializedName("balance_separator")
