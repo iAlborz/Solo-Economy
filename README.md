@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="common/src/main/resources/assets/economycraft/logo.png" width="128" alt="Solo Economy">
+</p>
+
 # Solo Economy
 
 A solo survival shop and money system for Fabric (and NeoForge).
