@@ -16,11 +16,16 @@ architectury {
 // A handful of Minecraft classes were renamed between the last obfuscated version (1.21.11,
 // e.g. ClickType) and the unobfuscated 26.x line (e.g. ContainerInput). Everything else lives in
 // src/main/java; only the files that actually reference one of those renamed classes live here.
+// Client overlays: 26.x uses Identifier + GuiGraphicsExtractor; 1.21.x uses the obfuscated tree.
 sourceSets {
     main {
         java {
             srcDir "src/${tgt.obfuscated ? 'obfuscated' : 'unobfuscated'}/java"
             srcDir "src/${tgt.legacy121 ? 'legacy121' : 'modern'}/java"
+            srcDir "src/${tgt.obfuscated ? 'click-legacy' : 'click-modern'}/java"
+            if (!tgt.obfuscated) {
+                srcDir "src/${tgt.mc.toString().startsWith('26.1') ? 'v261' : 'v262'}/java"
+            }
         }
     }
 }

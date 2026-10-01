@@ -218,15 +218,15 @@ public final class RecipeBookShopOverlay {
             selectedCategory = pending.category();
             pendingQuery = pending.query();
             openBook = true;
-            Screen screen = minecraft.gui.screen();
+            Screen screen = ClientScreens.current(minecraft);
             if (isTarget(screen)) {
                 applyOpen(screen, pendingQuery);
             } else {
-                minecraft.gui.setScreen(new InventoryScreen(minecraft.player));
+                ClientScreens.open(minecraft, new InventoryScreen(minecraft.player));
             }
         }
         if (isShopMode()) hideVanillaRecipes(recipeBook(bound), true);
-        Screen screen = minecraft.gui.screen();
+        Screen screen = ClientScreens.current(minecraft);
         if (screen == bound) refresh(screen, 0, 0);
     }
 

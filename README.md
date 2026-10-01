@@ -9,6 +9,8 @@
 A solo survival shop and money system for Fabric (and NeoForge).
 Requires Architectury API.
 
+Playable on **Fabric 26.2** and **26.1**. Jars for 1.21.11 and 1.21.1 are not ready yet — the recipe-book shop UI uses APIs that changed after those versions.
+
 Based on [EconomyCraft](https://github.com/PhilipB06/EconomyCraft) by ReaZip.
 
 ---
