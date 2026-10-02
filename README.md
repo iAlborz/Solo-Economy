@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="common/src/main/resources/assets/economycraft/logo.png" width="128" alt="Solo Economy">
+  <img src="src/main/resources/assets/economycraft/logo.png" width="128" alt="Solo Economy">
 </p>
 
 [Solo Economy](README.md) · [Prices](Prices.md) · [Config](Config.md)
 
 # Solo Economy
 
-A solo survival shop and money system for Fabric (and NeoForge).
-Requires Architectury API.
+A solo survival shop and money system for Fabric **26.2**.
+Requires only Fabric API.
 
-Playable on **Fabric 26.2** and **26.1**. Jars for 1.21.11 and 1.21.1 are not ready yet — the recipe-book shop UI uses APIs that changed after those versions.
+The shop UI is drawn by the mod on the client, so every player who joins (including LAN guests) needs the same jar installed.
 
 Based on [EconomyCraft](https://github.com/PhilipB06/EconomyCraft) by ReaZip.
 
@@ -17,7 +17,7 @@ Based on [EconomyCraft](https://github.com/PhilipB06/EconomyCraft) by ReaZip.
 
 ## Setup
 
-1. Put the jar in your instance `mods` folder with Fabric API and Architectury API.
+1. Put the jar in your instance `mods` folder with Fabric API.
 2. Open inventory or a crafting table, open the recipe book, and click the yellow bag next to Search.
 3. Operators can run `/eco admin` to edit the shop, settings, and balances. See [Config](Config.md).
 

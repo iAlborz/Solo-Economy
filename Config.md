@@ -2,7 +2,7 @@
 
 # Config
 
-Admin menu, config files, placeholders, logs, and the developer API.
+Admin menu, config files, logs, and the developer API.
 
 ---
 
@@ -110,27 +110,6 @@ Further keys are written by the editor:
 - `components` holds NBT for custom items such as a name, enchantments or shulker contents. JSON keys must be unique, so a second variant of the same item takes a `#label` suffix, e.g.: `minecraft:shulker_box#loot_rare`. The suffix is stripped on load and is not shown to players.
 - `"removed": true` marks a bundled default that was deleted, so it is not restored on the next start. Delete the entry to restore it.
 - `"dynamic_price_enabled": false` opts that item out of [dynamic shop pricing](#dynamic-shop-pricing) even while it's enabled server-wide. Omitted (defaults to enabled) unless the item was opted out. The `_categories` block at the bottom takes the same key per category.
-
----
-
-## Placeholders
-
-EconomyCraft can expose economy data to other mods through [Text Placeholder API](https://modrinth.com/mod/placeholder-api) on Fabric, or the unofficial [Placeholder API NeoForge](https://modrinth.com/mod/placeholder-api-neoforge) port on NeoForge.
-
-Both are optional and not bundled. The mod works without them, but the matching jar for your version and loader must be in the server's `mods` folder for these placeholders to resolve.
-
-| Placeholder                              | Description                                                                                |
-|------------------------------------------|--------------------------------------------------------------------------------------------|
-| `%economycraft:balance%`                 | Raw balance of the viewed player, e.g. `1000`.                                             |
-| `%economycraft:balance_formatted%`       | Balance with currency symbol and thousands separator, e.g. `$1.000`.                       |
-| `%economycraft:balance_short%`           | Balance abbreviated to 1 decimal place, e.g. `$1.2k`.                                      |
-| `%economycraft:daily_sell_remaining%`    | How much the player can still earn from selling today. Shows `∞` if the limit is disabled. |
-| `%economycraft:top_name 1%`              | Name of the player ranked `1` on the balance leaderboard (`1` = richest).                  |
-| `%economycraft:top_balance 1%`           | Raw balance of the player ranked `1`.                                                      |
-| `%economycraft:top_balance_formatted 1%` | Formatted balance of the player ranked `1`.                                                |
-| `%economycraft:top_balance_short 1%`     | Abbreviated balance of the player ranked `1`.                                              |
-
-The `top_*` placeholders take the rank as an argument, e.g. `%economycraft:top_name 3%` for third place. Ranks beyond the number of players resolve as invalid.
 
 ---
 

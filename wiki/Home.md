@@ -1,6 +1,6 @@
 # EconomyCraft API v1
 
-The API is included in the normal EconomyCraft Fabric and NeoForge jars. Server owners do not install a separate API mod.
+The API is included in the normal EconomyCraft Fabric jar. Server owners do not install a separate API mod.
 
 Public classes use this package:
 

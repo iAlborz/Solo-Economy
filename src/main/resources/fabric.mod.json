@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "economycraft",
+  "version": "${version}",
+  "name": "Solo Economy",
+  "icon": "assets/economycraft/logo.png",
+  "description": "A solo survival shop and money system. Based on EconomyCraft by ReaZip.",
+  "authors": ["Alborz"],
+  "license": "GPL-3.0",
+  "environment": "*",
+  "accessWidener": "economycraft.accesswidener",
+  "entrypoints": {
+    "main": ["com.reazip.economycraft.fabric.EconomyCraftFabric"],
+    "client": ["com.reazip.economycraft.fabric.client.EconomyCraftFabricClient"]
+  },
+  "depends": {
+    "minecraft": "${minecraft_range}",
+    "fabricloader": ">=0.15.0",
+    "fabric-api": "*"
+  }
+}
