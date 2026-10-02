@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -81,6 +82,16 @@ public final class ShopDisplay {
             out.addAll(prices.buyableInTree(source));
         }
         return out;
+    }
+
+    public static List<PriceRegistry.PriceEntry> buyableInAllCategories(PriceRegistry prices) {
+        Map<String, PriceRegistry.PriceEntry> out = new LinkedHashMap<>();
+        for (String display : displayCategories(prices)) {
+            for (PriceRegistry.PriceEntry entry : buyableForDisplay(prices, display)) {
+                out.putIfAbsent(entry.key(), entry);
+            }
+        }
+        return new ArrayList<>(out.values());
     }
 
     public static List<PriceRegistry.PriceEntry> inVanillaOrder(List<PriceRegistry.PriceEntry> entries) {

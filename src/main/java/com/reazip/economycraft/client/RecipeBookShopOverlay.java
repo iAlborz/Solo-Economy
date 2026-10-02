@@ -636,7 +636,9 @@ public final class RecipeBookShopOverlay {
                 selectedCategory = cats.isEmpty() ? null : cats.get(0);
             }
             String query = searchQuery();
-            List<PriceRegistry.PriceEntry> list = ShopDisplay.buyableForDisplay(prices, selectedCategory);
+            List<PriceRegistry.PriceEntry> list = query.isEmpty()
+                    ? ShopDisplay.buyableForDisplay(prices, selectedCategory)
+                    : ShopDisplay.buyableInAllCategories(prices);
             if (!query.isEmpty()) {
                 String q = query.toLowerCase();
                 List<PriceRegistry.PriceEntry> filtered = new ArrayList<>();
