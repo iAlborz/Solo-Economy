@@ -2,37 +2,13 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven { url "https://maven.fabricmc.net/" }
-        maven { url "https://maven.architectury.dev/" }
-        maven { url "https://maven.neoforged.net/releases" }
         mavenCentral()
     }
 }
 
 plugins {
-    // Auto-provisions a JDK toolchain (21 or 25, depending on the target) for compilation if none is installed locally.
+    // Auto-provisions the JDK 25 toolchain for compilation if none is installed locally.
     id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
 }
 
 rootProject.name = "economycraft"
-
-def raw = gradle.startParameter.projectProperties.get("filter_platforms")
-if (raw == null || raw.trim().isEmpty()) {
-    raw = System.getProperty("filter_platforms", "fabric,neoforge")
-}
-def enabled = raw.split(",").collect { it.trim() }.findAll { it }
-println "[settings.gradle] filter_platforms = ${enabled}"
-
-include("api")
-include("common")
-if (enabled.contains("fabric")) {
-    println "[settings.gradle] including fabric"
-    include("fabric")
-} else {
-    println "[settings.gradle] skipping fabric"
-}
-if (enabled.contains("neoforge")) {
-    println "[settings.gradle] including neoforge"
-    include("neoforge")
-} else {
-    println "[settings.gradle] skipping neoforge"
-}

@@ -1,3 +1,8 @@
+### Breaking
+- Fabric 26.2 only. NeoForge and Minecraft 26.1 / 1.21.x builds are removed.
+- Architectury API is no longer required. The only dependency is Fabric API.
+- Removed the optional Text Placeholder API integration (`%economycraft:...%` placeholders).
+
 ### Features
 - Added optional dynamic shop pricing.
 - The Sell UI can now sell shulker boxes.
