@@ -21,11 +21,6 @@ public final class PlaceholderValues {
         return EconomyCraft.formatMoneyShort(economy.getBalance(playerId, true));
     }
 
-    public static String dailySellRemaining(EconomyManager economy, UUID playerId) {
-        long remaining = economy.getDailySellRemaining(playerId);
-        return remaining == Long.MAX_VALUE ? "∞" : String.valueOf(remaining);
-    }
-
     public static @Nullable String topName(EconomyManager economy, @Nullable String arg) {
         EconomyManager.LeaderboardEntry entry = topEntry(economy, arg);
         return entry != null ? entry.name() : null;

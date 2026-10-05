@@ -1,3 +1,16 @@
+### New
+- **The inventory shop now works for every player**, not just the host. The server sends each player their balance and the shop, and buys, sales and searches go back as network messages.
+- **Joint accounts:** click **Joint** on the balance card to invite everyone else online. Each player who accepts has their balance added to one shared balance, and every sale, purchase and reward then changes everyone's balance. Click **Joint** again to leave; the shared balance is split evenly.
+- **Send money** to another player from the balance card.
+- **Quick sell:** in shop mode, hold Control or Command and click a stack in your inventory to sell it.
+- **Worn tools and armor can be sold** for their price scaled by remaining durability, rounded up to the next dollar.
+- **Search covers every category** instead of only the selected tab.
+- About 435 items that used to be sell-only can now be bought (iron bars and chains, fences, doors, buttons, banners, candles, ores and more), priced from the shop's usual buy/sell pattern. Waystone items, lower-level enchanted books and potion variants stay sell-only.
+
+### Removed
+- The daily sell limit.
+- The `/eco buy`, `/eco search` and `/eco instasell` commands (the inventory UI uses network messages instead). `/eco joint accept|decline` exists only for the chat invitation links.
+
 ### Breaking
 - Fabric 26.2 only. NeoForge and Minecraft 26.1 / 1.21.x builds are removed.
 - Architectury API is no longer required. The only dependency is Fabric API.

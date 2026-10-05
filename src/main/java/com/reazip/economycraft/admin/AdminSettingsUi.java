@@ -65,7 +65,6 @@ public final class AdminSettingsUi {
     private enum Setting {
         STARTING_BALANCE("Starting Balance", "Money a brand new player begins with."),
         DAILY_AMOUNT("Daily Reward", "Paid out once a day per player."),
-        DAILY_SELL_LIMIT("Daily Sell Limit", "Most a player can earn selling per day."),
         TAX_RATE("Tax Rate", "Cut the server takes from trades and orders."),
         PVP_LOSS("PvP Money Loss", "Share of the balance a killer takes."),
         SEPARATOR("Number Separator", "Thousands separator shown in prices.",
@@ -155,8 +154,6 @@ public final class AdminSettingsUi {
             return switch (setting) {
                 case STARTING_BALANCE -> valueItem(setting, Items.GOLD_INGOT, EconomyCraft.formatMoney(config.startingBalance));
                 case DAILY_AMOUNT -> valueItem(setting, Items.CLOCK, EconomyCraft.formatMoney(config.dailyAmount));
-                case DAILY_SELL_LIMIT -> valueItem(setting, Items.HOPPER, config.dailySellLimit <= 0
-                        ? "No limit" : EconomyCraft.formatMoney(config.dailySellLimit));
                 case TAX_RATE -> valueItem(setting, Items.PAPER, percent(config.taxRate));
                 case PVP_LOSS -> valueItem(setting, Items.IRON_SWORD, config.pvpBalanceLossPercentage <= 0
                         ? "Off" : percent(config.pvpBalanceLossPercentage));
@@ -376,8 +373,6 @@ public final class AdminSettingsUi {
                         v -> EconomyConfig.get().startingBalance = v);
                 case DAILY_AMOUNT -> editMoney(setting, config.dailyAmount, 0, Items.CLOCK,
                         v -> EconomyConfig.get().dailyAmount = v);
-                case DAILY_SELL_LIMIT -> editMoney(setting, config.dailySellLimit, 0, Items.HOPPER,
-                        v -> EconomyConfig.get().dailySellLimit = v);
                 case TAX_RATE -> editPercent(setting, config.taxRate, Items.PAPER,
                         v -> EconomyConfig.get().taxRate = v);
                 case PVP_LOSS -> editPercent(setting, config.pvpBalanceLossPercentage, Items.IRON_SWORD,

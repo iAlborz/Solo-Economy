@@ -5,11 +5,10 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.logging.LogUtils;
 import com.reazip.economycraft.admin.AdminUi;
-import com.reazip.economycraft.shop.ShopUi;
 import com.reazip.economycraft.util.AsyncFileWriter;
 import com.reazip.economycraft.util.EconomyPaths;
 import com.reazip.economycraft.util.IdentityCompat;
-import com.reazip.economycraft.util.LiveSearchable;
+import com.reazip.economycraft.bank.JointAccounts;
 import com.reazip.economycraft.util.PermissionCompat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
@@ -52,15 +51,12 @@ public final class EconomyCommands {
 
         root.then(literal("admin").requires(PermissionCompat.gamemaster())
                 .executes(ctx -> openAdmin(ctx.getSource())));
-        root.then(SellCommand.registerInstaSell().requires(s -> EconomyConfig.get().sellEnabled));
-        root.then(literal("search")
-                .executes(ctx -> applyLiveSearch(ctx.getSource(), ""))
-                .then(argument("query", StringArgumentType.greedyString())
-                        .executes(ctx -> applyLiveSearch(ctx.getSource(), StringArgumentType.getString(ctx, "query")))));
-        root.then(literal("buy")
-                .requires(s -> EconomyConfig.get().shopEnabled)
-                .then(argument("item", StringArgumentType.greedyString())
-                        .executes(ctx -> buyItem(ctx.getSource(), StringArgumentType.getString(ctx, "item")))));
+
+        root.then(literal("joint")
+                .then(literal("accept").then(argument("inviter", StringArgumentType.word())
+                        .executes(ctx -> JointAccounts.respond(ctx.getSource(), StringArgumentType.getString(ctx, "inviter"), true))))
+                .then(literal("decline").then(argument("inviter", StringArgumentType.word())
+                        .executes(ctx -> JointAccounts.respond(ctx.getSource(), StringArgumentType.getString(ctx, "inviter"), false)))));
 
         root.then(addMoney);
         root.then(setMoney);
@@ -105,12 +101,6 @@ public final class EconomyCommands {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             server.getCommands().sendCommands(player);
         }
-    }
-
-    private static int applyLiveSearch(CommandSourceStack source, String query) {
-        ServerPlayer player = tryGetPlayer(source);
-        if (player == null) return 0;
-        return LiveSearchable.apply(player, query) ? 1 : 0;
     }
 
     private static int openAdmin(CommandSourceStack source) {
@@ -298,7 +288,7 @@ public final class EconomyCommands {
             UUID id = p.id();
 
             if (amount == null) {
-                if (!manager.getBalances().containsKey(id)) {
+                if (!manager.hasBalance(id)) {
                     source.sendFailure(Component.literal(
                                     "Failed to remove all money from " + p.name() + "'s balance. Unknown player.")
                             .withStyle(ChatFormatting.RED));
@@ -329,7 +319,7 @@ public final class EconomyCommands {
         for (var p : profiles) {
             UUID id = p.id();
             if (amount == null) {
-                if (!manager.getBalances().containsKey(id)) {
+                if (!manager.hasBalance(id)) {
                     source.sendFailure(Component.literal(
                                     "Failed to remove all money from " + p.name() + "'s balance. Unknown player.")
                             .withStyle(ChatFormatting.RED));
@@ -399,29 +389,6 @@ public final class EconomyCommands {
         reply(source, executor, msg, true);
 
         return count;
-    }
-
-    private static int buyItem(CommandSourceStack source, String raw) {
-        ServerPlayer player = tryGetPlayer(source);
-        if (player == null) {
-            source.sendFailure(Component.literal("Only players can buy.").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        String id = raw == null ? "" : raw.trim();
-        int count = 1;
-        int space = id.lastIndexOf(' ');
-        if (space > 0) {
-            try {
-                count = Integer.parseInt(id.substring(space + 1).trim());
-                id = id.substring(0, space).trim();
-            } catch (NumberFormatException ignored) {
-            }
-        }
-        if (id.isEmpty() || count < 1) {
-            source.sendFailure(Component.literal("Usage: /eco buy <item> [count]").withStyle(ChatFormatting.RED));
-            return 0;
-        }
-        return ShopUi.buy(player, id, count);
     }
 
     @Nullable

@@ -1,7 +1,7 @@
 package com.reazip.economycraft.client;
 
 import com.reazip.economycraft.EconomyCraft;
-import com.reazip.economycraft.PriceRegistry;
+import com.reazip.economycraft.net.EconomyPackets.CategoryInfo;
 import com.reazip.economycraft.shop.ShopDisplay;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,8 +20,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,6 +94,7 @@ public final class ShopCategoryOverlay {
         if (screen != bound || panel == null || !(screen instanceof AbstractContainerScreen<?> container)) return;
         panel.visible = RecipeBookShopOverlay.isShopMode();
         if (!panel.visible) return;
+        if (panel.lastVersion != ClientEconomy.version()) panel.reload();
         place(container);
     }
 
@@ -103,26 +102,6 @@ public final class ShopCategoryOverlay {
         if (panel == null) return;
         panel.setX(RecipeBookShopOverlay.bookLeft(screen) - WIDTH);
         panel.setY(RecipeBookShopOverlay.bookTop(screen));
-    }
-
-    private static @Nullable PriceRegistry prices() {
-        MinecraftServer server = Minecraft.getInstance().getSingleplayerServer();
-        return server == null ? null : EconomyCraft.getManager(server).getPrices();
-    }
-
-    private static @Nullable ServerPlayer viewer() {
-        Minecraft minecraft = Minecraft.getInstance();
-        MinecraftServer server = minecraft.getSingleplayerServer();
-        if (server == null || minecraft.player == null) return null;
-        return server.getPlayerList().getPlayer(minecraft.player.getUUID());
-    }
-
-    private static long currentBalance() {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null) return 0L;
-        MinecraftServer server = minecraft.getSingleplayerServer();
-        if (server == null) return 0L;
-        return EconomyCraft.getManager(server).getBalance(minecraft.player.getUUID(), true);
     }
 
     private static void blit(GuiGraphicsExtractor graphics, int x, int y, float u, float v, int w, int h) {
@@ -161,7 +140,9 @@ public final class ShopCategoryOverlay {
 
     private static final class Panel extends AbstractWidget {
         private List<String> categories = List.of();
+        private List<String> names = List.of();
         private List<ItemStack> icons = List.of();
+        private int lastVersion = -1;
         private @Nullable String selected;
 
         private Panel(int x, int y) {
@@ -169,21 +150,27 @@ public final class ShopCategoryOverlay {
         }
 
         private void reload() {
-            PriceRegistry prices = prices();
-            ServerPlayer viewer = viewer();
-            if (prices == null || viewer == null) {
+            lastVersion = ClientEconomy.version();
+            if (!ClientEconomy.hasCatalog()) {
                 categories = List.of();
+                names = List.of();
                 icons = List.of();
                 selected = null;
                 setHeight(GRID_Y + SLOT_SIZE + PAD);
                 return;
             }
 
-            categories = ShopDisplay.displayCategories(prices);
-            List<ItemStack> next = new ArrayList<>(categories.size());
-            for (String cat : categories) {
-                next.add(ShopDisplay.createCategoryIcon(cat, ShopDisplay.primarySource(cat), prices, viewer, true));
+            List<CategoryInfo> infos = ClientEconomy.categories();
+            List<String> keys = new ArrayList<>(infos.size());
+            List<String> labels = new ArrayList<>(infos.size());
+            List<ItemStack> next = new ArrayList<>(infos.size());
+            for (CategoryInfo info : infos) {
+                keys.add(info.key());
+                labels.add(info.name());
+                next.add(info.icon());
             }
+            categories = keys;
+            names = labels;
             icons = next;
             selected = resolveSelected();
             if (selected != null && RecipeBookShopOverlay.selectedCategory() == null) {
@@ -211,11 +198,7 @@ public final class ShopCategoryOverlay {
         private @Nullable Component hoverNameAt(int mouseX, int mouseY) {
             int index = indexAt(mouseX, mouseY);
             if (index < 0 || index >= categories.size()) return null;
-            PriceRegistry prices = prices();
-            String cat = categories.get(index);
-            String name = prices == null ? ShopDisplay.formatCategoryTitle(cat)
-                    : ShopDisplay.getCategoryName(prices, cat, cat);
-            return Component.literal(name);
+            return Component.literal(names.get(index));
         }
 
         private int indexAt(double mouseX, double mouseY) {
@@ -255,7 +238,7 @@ public final class ShopCategoryOverlay {
             if (!visible) return;
             blitPanel(graphics, getX(), getY(), WIDTH, getHeight());
             Minecraft minecraft = Minecraft.getInstance();
-            Component balance = Component.literal(EconomyCraft.formatMoney(currentBalance()));
+            Component balance = Component.literal(EconomyCraft.formatMoney(ClientEconomy.balance()));
             graphics.text(minecraft.font, balance,
                     getX() + (WIDTH - minecraft.font.width(balance)) / 2, getY() + BALANCE_Y, TITLE_COLOR, false);
             for (int i = 0; i < categories.size(); i++) {

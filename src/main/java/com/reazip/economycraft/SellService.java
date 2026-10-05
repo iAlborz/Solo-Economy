@@ -33,7 +33,6 @@ public final class SellService {
         PriceEntry entry = prices.resolve(stack);
         if (entry == null) return null;
         if (entry.customItem() == null) {
-            if (prices.isSellBlockedByDamage(stack)) return null;
             if (checkContents && prices.isSellBlockedByContents(stack)) return null;
         }
         if (prices.getUnitSell(stack) == null) return null;

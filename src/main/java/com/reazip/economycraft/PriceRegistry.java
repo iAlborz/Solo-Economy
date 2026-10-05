@@ -326,9 +326,18 @@ public final class PriceRegistry {
         }
     }
 
+    /** What one of this item sells for. Worn tools and armor sell for their price scaled by remaining durability, rounded up to a whole dollar. */
     public Long getUnitSell(ItemStack stack) {
         PriceEntry p = resolve(stack);
-        return (p != null && p.unitSell() > 0) ? p.unitSell() : null;
+        if (p == null || p.unitSell() <= 0) return null;
+        return p.customItem() == null ? wornValue(p.unitSell(), stack) : p.unitSell();
+    }
+
+    public static long wornValue(long fullValue, ItemStack stack) {
+        if (!stack.isDamageableItem() || stack.getDamageValue() <= 0) return fullValue;
+        int max = stack.getMaxDamage();
+        long remaining = Math.max(0, max - stack.getDamageValue());
+        return Math.ceilDiv(fullValue * remaining, (long) max);
     }
 
     public boolean isSellBlockedByDamage(ItemStack stack) {

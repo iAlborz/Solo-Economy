@@ -1,6 +1,10 @@
 package com.reazip.economycraft;
 
+import com.reazip.economycraft.bank.JointGroups;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.logging.LogUtils;
 import com.reazip.economycraft.api.v1.BalanceEvents;
@@ -48,7 +52,6 @@ public class EconomyManager {
     private static final Method NEOFORGE_NAME_LOOKUP = findNeoForgeNameLookup();
     private static final Gson GSON = new Gson();
     private static final Type TYPE = new TypeToken<Map<UUID, Long>>(){}.getType();
-    private static final Type DAILY_SELL_TYPE = new TypeToken<Map<UUID, DailySellData>>(){}.getType();
     private static final String ECO_BALANCE_OBJECTIVE = "eco_balance";
     private static final int LEADERBOARD_SIZE = 5;
     private static final long SCOREBOARD_SCORE_SCALE = 1000L;
@@ -62,11 +65,12 @@ public class EconomyManager {
     private final MinecraftServer server;
     private final Path file;
     private final Path dailyFile;
-    private final Path dailySellFile;
 
     private final Map<UUID, Long> balances = new ConcurrentHashMap<>();
     private final Map<UUID, Long> lastDaily = new ConcurrentHashMap<>();
-    private final Map<UUID, DailySellData> dailySells = new ConcurrentHashMap<>();
+    /** Players who share finances: each group has one pooled balance, held under its first member. */
+    private final JointGroups jointGroups = new JointGroups(balances);
+    private final Path groupsFile;
     private final PriceRegistry prices;
     private final BalanceEventDispatcher balanceEvents;
     private final BalanceMutationEngine balanceMutations;
@@ -92,11 +96,11 @@ public class EconomyManager {
 
         this.file = dataDir.resolve("balances.json");
         this.dailyFile = dataDir.resolve("daily.json");
-        this.dailySellFile = dataDir.resolve("daily_sells.json");
+        this.groupsFile = dataDir.resolve("groups.json");
 
         load();
         loadDaily();
-        loadDailySells();
+        loadGroups();
 
         Path logsDir = EconomyPaths.logsDir(server);
         TransactionLogWriter.cleanup(logsDir, EconomyConfig.get().transactionLogRetentionDays);
@@ -311,8 +315,9 @@ public class EconomyManager {
     }
 
     public Long getBalance(UUID player, boolean newBalanceIfNonExistent) {
-        if (!newBalanceIfNonExistent) return balances.get(player);
-        return balanceMutations.getBalance(player);
+        UUID pool = pool(player);
+        if (!newBalanceIfNonExistent) return balances.get(pool);
+        return balanceMutations.getBalance(pool);
     }
 
     public void addMoney(UUID player, long amount) {
@@ -325,7 +330,7 @@ public class EconomyManager {
 
     public BalanceMutationResult addMoney(UUID player, long amount, @Nullable MutationSource source, @Nullable String detail) {
         requireServerThread();
-        return balanceMutations.add(player, amount, source, detail);
+        return balanceMutations.add(pool(player), amount, source, withActor(player, detail));
     }
 
     public void setMoney(UUID player, long amount) {
@@ -338,7 +343,7 @@ public class EconomyManager {
 
     public BalanceMutationResult setMoney(UUID player, long amount, @Nullable MutationSource source, @Nullable String detail) {
         requireServerThread();
-        return balanceMutations.set(player, amount, source, detail);
+        return balanceMutations.set(pool(player), amount, source, withActor(player, detail));
     }
 
     public boolean removeMoney(UUID player, long amount) {
@@ -351,7 +356,7 @@ public class EconomyManager {
 
     public BalanceMutationResult removeMoney(UUID player, long amount, @Nullable MutationSource source, @Nullable String detail) {
         requireServerThread();
-        return balanceMutations.remove(player, amount, source, detail);
+        return balanceMutations.remove(pool(player), amount, source, withActor(player, detail));
     }
 
     public boolean pay(UUID from, UUID to, long amount) {
@@ -364,7 +369,7 @@ public class EconomyManager {
 
     public PaymentResult pay(UUID from, UUID to, long amount, @Nullable MutationSource source, @Nullable String detail) {
         requireServerThread();
-        return balanceMutations.pay(from, to, amount, source, detail);
+        return balanceMutations.pay(pool(from), pool(to), amount, source, detail);
     }
 
     public PaymentResult transferMoney(UUID from, UUID to, long debitAmount, long creditAmount,
@@ -375,7 +380,7 @@ public class EconomyManager {
     public PaymentResult transferMoney(UUID from, UUID to, long debitAmount, long creditAmount,
                                        MutationSource source, @Nullable String detail) {
         requireServerThread();
-        return balanceMutations.transfer(from, to, debitAmount, creditAmount, source, detail);
+        return balanceMutations.transfer(pool(from), pool(to), debitAmount, creditAmount, source, detail);
     }
 
     public BalanceEvents getBalanceEvents() {
@@ -400,22 +405,84 @@ public class EconomyManager {
     public void save() {
         AsyncFileWriter.writeAsync(file, GSON.toJson(new HashMap<>(balances), TYPE));
         UuidLongMapStore.persist(dailyFile, lastDaily);
-        AsyncFileWriter.writeAsync(dailySellFile, GSON.toJson(new HashMap<>(dailySells), DAILY_SELL_TYPE));
+        saveGroups();
         dynamicPrices.flush();
+    }
+
+    // ---- joint accounts: players who accept an invite share one balance
+
+    private void loadGroups() {
+        if (!Files.exists(groupsFile)) return;
+        try {
+            JsonArray all = GSON.fromJson(Files.readString(groupsFile), JsonArray.class);
+            if (all == null) return;
+            for (JsonElement entry : all) {
+                List<UUID> members = new ArrayList<>();
+                for (JsonElement id : entry.getAsJsonArray()) members.add(UUID.fromString(id.getAsString()));
+                jointGroups.restore(members);
+            }
+        } catch (IOException | RuntimeException e) {
+            LOGGER.error("[EconomyCraft] Failed to read {}", groupsFile, e);
+        }
+    }
+
+    private void saveGroups() {
+        JsonArray all = new JsonArray();
+        for (List<UUID> members : jointGroups.snapshot()) {
+            JsonArray ids = new JsonArray();
+            members.forEach(id -> ids.add(id.toString()));
+            all.add(ids);
+        }
+        AsyncFileWriter.writeAsync(groupsFile, GSON.toJson(all));
+    }
+
+    /** The id whose balance this player spends from: themselves, or the head of their joint account. */
+    private UUID pool(UUID player) {
+        return jointGroups.pool(player);
+    }
+
+    public boolean isInJointAccount(UUID player) {
+        return jointGroups.isIn(player);
+    }
+
+    /** Everyone sharing finances with {@code player}, not counting {@code player}. */
+    public List<UUID> jointPartners(UUID player) {
+        return jointGroups.partners(player);
+    }
+
+    public boolean hasBalance(UUID player) {
+        return balances.containsKey(pool(player));
+    }
+
+    /** {@code accepter} joins {@code inviter}'s finances; their balances are added together. */
+    public JointGroups.JoinResult joinJointAccount(UUID inviter, UUID accepter) {
+        requireServerThread();
+        JointGroups.JoinResult result = jointGroups.join(inviter, accepter, MAX, balanceMutations::getBalance);
+        if (result == JointGroups.JoinResult.JOINED) {
+            updateLeaderboard();
+            save();
+        }
+        return result;
+    }
+
+    /** Leaves the joint account; the shared balance is split evenly and the leaver takes any remainder. */
+    public boolean leaveJointAccount(UUID player) {
+        requireServerThread();
+        if (!jointGroups.leave(player)) return false;
+        updateLeaderboard();
+        save();
+        return true;
+    }
+
+    private @Nullable String withActor(UUID actor, @Nullable String detail) {
+        if (!isInJointAccount(actor)) return detail;
+        String name = getBestName(actor);
+        if (name == null || name.isBlank()) return detail;
+        return detail == null ? "by " + name : detail + " (by " + name + ")";
     }
 
     private void loadDaily() {
         UuidLongMapStore.load(dailyFile, lastDaily);
-    }
-
-    private void loadDailySells() {
-        if (Files.exists(dailySellFile)) {
-            try {
-                String json = Files.readString(dailySellFile);
-                Map<UUID, DailySellData> map = GSON.fromJson(json, DAILY_SELL_TYPE);
-                if (map != null) dailySells.putAll(map);
-            } catch (IOException ignored) {}
-        }
     }
 
     private void applyScoreboardSettingOnStartup() {
@@ -643,6 +710,7 @@ public class EconomyManager {
 
     public void removePlayer(UUID id) {
         requireServerThread();
+        if (isInJointAccount(id)) leaveJointAccount(id);
         balanceMutations.delete(id);
     }
 
@@ -659,39 +727,6 @@ public class EconomyManager {
 
     public boolean hasClaimedDailyToday(UUID player) {
         return lastDaily.getOrDefault(player, -1L) == LocalDate.now().toEpochDay();
-    }
-
-    public boolean tryRecordDailySell(UUID player, long saleAmount) {
-        long limit = EconomyConfig.get().dailySellLimit;
-        if (limit <= 0) return false;
-
-        DailySellData data = getOrCreateTodaySellData(player);
-        long newTotal = data.amount() + saleAmount;
-        if (newTotal > limit) {
-            return true;
-        }
-
-        dailySells.put(player, new DailySellData(data.day(), newTotal));
-        save();
-        return false;
-    }
-
-    public long getDailySellRemaining(UUID player) {
-        long limit = EconomyConfig.get().dailySellLimit;
-        if (limit <= 0) return Long.MAX_VALUE;
-
-        DailySellData data = getOrCreateTodaySellData(player);
-        return Math.max(0, limit - data.amount());
-    }
-
-    private DailySellData getOrCreateTodaySellData(UUID player) {
-        long today = LocalDate.now().toEpochDay();
-        DailySellData data = dailySells.get(player);
-        if (data == null || data.day() != today) {
-            data = new DailySellData(today, 0L);
-            dailySells.put(player, data);
-        }
-        return data;
     }
 
     public void handlePvpKill(ServerPlayer victim, ServerPlayer killer) {
@@ -728,5 +763,4 @@ public class EconomyManager {
         }
     }
 
-    private record DailySellData(long day, long amount) {}
 }

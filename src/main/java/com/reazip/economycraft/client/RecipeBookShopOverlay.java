@@ -1,9 +1,10 @@
 package com.reazip.economycraft.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.reazip.economycraft.EconomyCraft;
-import com.reazip.economycraft.PriceRegistry;
-import com.reazip.economycraft.shop.ShopDisplay;
-import com.reazip.economycraft.shop.ShopUi;
+import com.reazip.economycraft.net.EconomyPackets;
+import com.reazip.economycraft.net.EconomyPackets.CategoryInfo;
+import com.reazip.economycraft.net.EconomyPackets.ItemInfo;
 import com.reazip.economycraft.util.MenuUiSupport;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -28,8 +29,8 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 public final class RecipeBookShopOverlay {
@@ -164,7 +167,7 @@ public final class RecipeBookShopOverlay {
 
     private static void onTick(Minecraft minecraft) {
         if (minecraft.player == null) return;
-        ShopUi.Pending pending = ShopUi.consumeOpen(minecraft.player.getUUID());
+        ClientEconomy.PendingOpen pending = ClientEconomy.consumePendingOpen();
         if (pending != null) {
             mode = FilterMode.SHOP;
             selectedCategory = pending.category();
@@ -186,6 +189,7 @@ public final class RecipeBookShopOverlay {
         if (screen != bound || !bookVisible(screen)) return true;
         double mouseX = event.x();
         double mouseY = event.y();
+        if (mode == FilterMode.SHOP && quickSellHeld() && quickSell(screen)) return false;
         if (modeBar != null && modeBar.visible && modeBar.isMouseOver(mouseX, mouseY)) {
             if (event.button() == 0) modeBar.clickAt(mouseX, mouseY);
             return false;
@@ -211,6 +215,7 @@ public final class RecipeBookShopOverlay {
             return;
         }
         bound = screen;
+        ClientEconomy.requestCatalog();
         Object book = recipeBook(screen);
         if (book == null) return;
 
@@ -392,23 +397,29 @@ public final class RecipeBookShopOverlay {
         return value == null ? "" : value.trim();
     }
 
-    private static @Nullable PriceRegistry prices() {
-        MinecraftServer server = Minecraft.getInstance().getSingleplayerServer();
-        return server == null ? null : EconomyCraft.getManager(server).getPrices();
+    /** Control or Command held: Minecraft maps Control-click to a right-click on a Mac, so both count. */
+    private static boolean quickSellHeld() {
+        var window = Minecraft.getInstance().getWindow();
+        return InputConstants.isKeyDown(window, InputConstants.KEY_LCONTROL)
+                || InputConstants.isKeyDown(window, InputConstants.KEY_RCONTROL)
+                || InputConstants.isKeyDown(window, InputConstants.KEY_LSUPER)
+                || InputConstants.isKeyDown(window, InputConstants.KEY_RSUPER);
     }
 
-    private static @Nullable ServerPlayer viewer() {
-        Minecraft minecraft = Minecraft.getInstance();
-        MinecraftServer server = minecraft.getSingleplayerServer();
-        if (server == null || minecraft.player == null) return null;
-        return server.getPlayerList().getPlayer(minecraft.player.getUUID());
+    /** Sells the stack under the mouse if it is in the player's own inventory. Returns true if the click was used. */
+    private static boolean quickSell(Screen screen) {
+        if (!(screen instanceof AbstractContainerScreen<?> container)) return false;
+        Slot slot = container.hoveredSlot;
+        var player = Minecraft.getInstance().player;
+        if (slot == null || player == null || slot.container != player.getInventory() || slot.getContainerSlot() >= Inventory.INVENTORY_SIZE
+                || !slot.hasItem()) return false;
+        if (!ClientEconomy.sellEnabled()) return false;
+        ClientEconomy.send(new EconomyPackets.QuickSell(slot.index));
+        return true;
     }
 
-    private static void sendBuy(PriceRegistry.PriceEntry entry, boolean bulk) {
-        ClientPacketListener connection = Minecraft.getInstance().getConnection();
-        if (connection == null) return;
-        int amount = bulk ? Math.max(1, entry.stack()) : 1;
-        connection.sendCommand("eco buy " + entry.key() + (amount > 1 ? " " + amount : ""));
+    private static void sendBuy(ItemInfo item, boolean bulk) {
+        ClientEconomy.send(new EconomyPackets.Buy(item.key(), bulk));
     }
 
     private static boolean claimClick() {
@@ -612,55 +623,54 @@ public final class RecipeBookShopOverlay {
     }
 
     private static final class ShopPage extends AbstractWidget {
-        private List<PriceRegistry.PriceEntry> entries = List.of();
+        private List<ItemInfo> entries = List.of();
         private List<ItemStack> stacks = List.of();
         private int page;
         private String lastQuery = "";
         private @Nullable String lastCategory;
+        private int lastVersion = -1;
 
         private ShopPage() {
             super(0, 0, bookW(), bookH() - GRID_Y, SHOP);
         }
 
         private void reload() {
-            PriceRegistry prices = prices();
-            ServerPlayer viewer = viewer();
-            if (prices == null || viewer == null) {
+            if (!ClientEconomy.hasCatalog()) {
                 entries = List.of();
                 stacks = List.of();
                 page = 0;
                 return;
             }
             if (selectedCategory == null) {
-                List<String> cats = ShopDisplay.displayCategories(prices);
-                selectedCategory = cats.isEmpty() ? null : cats.get(0);
+                List<CategoryInfo> cats = ClientEconomy.categories();
+                selectedCategory = cats.isEmpty() ? null : cats.get(0).key();
             }
             String query = searchQuery();
-            List<PriceRegistry.PriceEntry> list = query.isEmpty()
-                    ? ShopDisplay.buyableForDisplay(prices, selectedCategory)
-                    : ShopDisplay.buyableInAllCategories(prices);
-            if (!query.isEmpty()) {
+            List<ItemInfo> list = new ArrayList<>();
+            if (query.isEmpty()) {
+                for (ItemInfo item : ClientEconomy.items()) {
+                    if (item.category().equals(selectedCategory)) list.add(item);
+                }
+            } else {
                 String q = query.toLowerCase();
-                List<PriceRegistry.PriceEntry> filtered = new ArrayList<>();
-                for (PriceRegistry.PriceEntry entry : list) {
-                    ItemStack stack = ShopDisplay.createDisplayStack(entry, viewer);
-                    if (MenuUiSupport.matchesSearch(stack, query)
-                            || ShopDisplay.shopItemName(entry, stack).toLowerCase().contains(q)
-                            || entry.id().asString().toLowerCase().contains(q)
-                            || entry.key().toLowerCase().contains(q)) {
-                        filtered.add(entry);
+                Set<String> seen = new HashSet<>();
+                for (ItemInfo item : ClientEconomy.items()) {
+                    if (!seen.add(item.key())) continue;
+                    if (MenuUiSupport.matchesSearch(item.stack(), query)
+                            || item.name().toLowerCase().contains(q)
+                            || item.itemId().toLowerCase().contains(q)
+                            || item.key().toLowerCase().contains(q)) {
+                        list.add(item);
                     }
                 }
-                list = filtered;
             }
-            entries = ShopDisplay.inVanillaOrder(list);
+            entries = list;
             List<ItemStack> next = new ArrayList<>(entries.size());
-            for (PriceRegistry.PriceEntry entry : entries) {
-                next.add(ShopDisplay.createDisplayStack(entry, viewer));
-            }
+            for (ItemInfo item : entries) next.add(item.stack());
             stacks = next;
             lastQuery = query;
             lastCategory = selectedCategory;
+            lastVersion = ClientEconomy.version();
             int pages = Math.max(1, (entries.size() + perPage() - 1) / perPage());
             if (page >= pages) page = pages - 1;
             if (page < 0) page = 0;
@@ -668,7 +678,8 @@ public final class RecipeBookShopOverlay {
 
         private void update() {
             String query = searchQuery();
-            if (!query.equals(lastQuery) || (selectedCategory != null && !selectedCategory.equals(lastCategory))) {
+            if (!query.equals(lastQuery) || lastVersion != ClientEconomy.version()
+                    || (selectedCategory != null && !selectedCategory.equals(lastCategory))) {
                 reload();
             }
             int maxPage = pages() - 1;
@@ -679,17 +690,10 @@ public final class RecipeBookShopOverlay {
         private List<Component> hoverLinesAt(int mouseX, int mouseY) {
             int idx = itemIndex(indexAt(mouseX, mouseY));
             if (idx < 0 || idx >= entries.size()) return List.of();
-            PriceRegistry.PriceEntry entry = entries.get(idx);
-            PriceRegistry prices = prices();
-            long buy = prices == null ? entry.unitBuy()
-                    : EconomyCraft.getManager(Minecraft.getInstance().getSingleplayerServer())
-                    .getEffectiveBuyPrice(entry);
-            String name = idx < stacks.size()
-                    ? ShopDisplay.shopItemName(entry, stacks.get(idx))
-                    : entry.id().path();
+            ItemInfo item = entries.get(idx);
             return List.of(
-                    Component.literal(name),
-                    Component.literal("Buy " + EconomyCraft.formatMoney(buy)));
+                    Component.literal(item.name()),
+                    Component.literal("Buy " + EconomyCraft.formatMoney(item.buy())));
         }
 
         private boolean queueHoverTooltip(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {

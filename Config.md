@@ -58,7 +58,6 @@ Default shop prices are listed on [Prices](Prices.md).
 |----------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------|
 | `startingBalance`                | `1000`  | Money new players start with.                                                                                                   |
 | `dailyAmount`                    | `100`   | Money given by the daily reward.                                                                                                |
-| `dailySellLimit`                 | `10000` | Most a player can earn per day from selling. `0` disables the limit.                                                            |
 | `taxRate`                        | `0.1`   | Tax on trades and orders, as a decimal (`0.1` = 10%).                                                                           |
 | `pvp_balance_loss_percentage`    | `0`     | Share of a balance the killer takes on a PvP death. `0` disables it.                                                            |
 | `scoreboard_enabled`             | `false` | Show the balance sidebar. Off in this local edition.                                                                            |

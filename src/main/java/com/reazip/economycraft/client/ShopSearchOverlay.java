@@ -1,6 +1,7 @@
 package com.reazip.economycraft.client;
 
 import com.reazip.economycraft.util.MenuUiSupport;
+import com.reazip.economycraft.net.EconomyPackets;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -11,7 +12,6 @@ import net.minecraft.client.gui.components.ImageWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.input.KeyEvent;
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -82,14 +82,7 @@ public final class ShopSearchOverlay {
     }
 
     private static void sendSearch(String query) {
-        ClientPacketListener connection = Minecraft.getInstance().getConnection();
-        if (connection == null) return;
-        String trimmed = query == null ? "" : query.trim();
-        if (trimmed.isEmpty()) {
-            connection.sendCommand("eco search");
-        } else {
-            connection.sendCommand("eco search " + trimmed);
-        }
+        ClientEconomy.send(new EconomyPackets.SearchQuery(query == null ? "" : query.trim()));
     }
 
     private static void hideSearchSlots(AbstractContainerScreen<?> screen) {

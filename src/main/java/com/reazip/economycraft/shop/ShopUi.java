@@ -5,8 +5,10 @@ import com.reazip.economycraft.EconomyCraft;
 import com.reazip.economycraft.EconomyManager;
 import com.reazip.economycraft.EconomySources;
 import com.reazip.economycraft.PriceRegistry;
+import com.reazip.economycraft.net.EconomyPackets;
 import com.reazip.economycraft.SellService;
 import com.reazip.economycraft.util.EconomySounds;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,30 +17,19 @@ import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 public final class ShopUi {
-    private static final Map<UUID, Pending> PENDING = new ConcurrentHashMap<>();
-
     private ShopUi() {}
-
-    public record Pending(@Nullable String category, @Nullable String query) {}
 
     public static void requestOpen(ServerPlayer player, @Nullable String category) {
         requestOpen(player, category, null);
     }
 
     public static void requestOpen(ServerPlayer player, @Nullable String category, @Nullable String query) {
-        PENDING.put(player.getUUID(), new Pending(category, query));
+        ServerPlayNetworking.send(player, new EconomyPackets.OpenShop(category == null ? "" : category, query == null ? "" : query));
         if (player.containerMenu != player.inventoryMenu && !(player.containerMenu instanceof CraftingMenu)) {
             player.closeContainer();
         }
-    }
-
-    public static @Nullable Pending consumeOpen(UUID playerId) {
-        return PENDING.remove(playerId);
     }
 
     public static void open(ServerPlayer player, EconomyManager eco) {

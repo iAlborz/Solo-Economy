@@ -27,7 +27,6 @@ public final class EconomyPaths {
     private static final List<String> DATA_FILES = List.of(
             "balances.json",
             "daily.json",
-            "daily_sells.json",
             "deliveries.json",
             "auctions.json",
             "shop.json",

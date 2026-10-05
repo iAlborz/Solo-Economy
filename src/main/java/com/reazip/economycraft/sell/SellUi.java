@@ -134,10 +134,6 @@ public final class SellUi {
             }
 
             long contentsValue = acc.total - before;
-            if (allSellable && EconomyConfig.get().dailySellLimit > 0
-                    && contentsValue > manager.getDailySellRemaining(viewer.getUUID())) {
-                allSellable = false;
-            }
             if (allSellable && contentsValue > EconomyManager.MAX - manager.getBalance(viewer.getUUID(), true)) {
                 allSellable = false;
             }
@@ -241,7 +237,6 @@ public final class SellUi {
             long orderPayout;
             int serverSold;
             long serverPayout;
-            int limitBlocked;
             int balanceBlocked;
             int shulkerBoxesKept;
         }
@@ -258,12 +253,6 @@ public final class SellUi {
             Long potential = safeMultiply(unitSell, split.serverRemaining());
             if (potential == null) return;
 
-            if (EconomyConfig.get().dailySellLimit > 0
-                    && potential > manager.getDailySellRemaining(player.getUUID())) {
-                totals.limitBlocked += split.serverRemaining();
-                return;
-            }
-
             String detail = EconomyCraft.describeItem(split.serverRemaining(), stack.getHoverName().getString());
             var result = manager.addMoney(player.getUUID(), potential, EconomySources.SHOP_SALE, detail);
             if (!result.successful()) {
@@ -271,9 +260,6 @@ public final class SellUi {
                 return;
             }
 
-            if (EconomyConfig.get().dailySellLimit > 0) {
-                manager.tryRecordDailySell(player.getUUID(), potential);
-            }
             totals.serverSold += split.serverRemaining();
             totals.serverPayout += potential;
             stack.shrink(split.serverRemaining());
@@ -323,14 +309,6 @@ public final class SellUi {
                                 " for " + EconomyCraft.formatMoney(totalPayout) +
                                 (totals.orderGiven > 0 ? " (" + totals.orderGiven + " to open orders for a better price)" : "") + ".")
                         .withStyle(ChatFormatting.GREEN));
-            }
-
-            if (totals.limitBlocked > 0) {
-                long remaining = manager.getDailySellRemaining(player.getUUID());
-                player.sendSystemMessage(Component.literal(totals.limitBlocked + " item" + (totals.limitBlocked == 1 ? "" : "s") +
-                                " was not sold: daily sell limit reached" +
-                                (remaining > 0 ? " (" + EconomyCraft.formatMoney(remaining) + " left today)." : "."))
-                        .withStyle(ChatFormatting.RED));
             }
 
             if (totals.balanceBlocked > 0) {

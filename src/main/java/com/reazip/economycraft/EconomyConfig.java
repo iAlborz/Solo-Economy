@@ -22,7 +22,6 @@ public class EconomyConfig {
 
     public long startingBalance;
     public long dailyAmount;
-    public long dailySellLimit;
     public double taxRate;
     @SerializedName("pvp_balance_loss_percentage")
     public double pvpBalanceLossPercentage;
