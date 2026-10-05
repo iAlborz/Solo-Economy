@@ -2,31 +2,31 @@
   "minecraft:angler_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:archer_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:arms_up_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:blade_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:brewer_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:brush": {
@@ -38,109 +38,109 @@
   "minecraft:burn_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:danger_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:decorated_pot": {
     "category": "archaeology",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 5
   },
   "minecraft:explorer_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:flow_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:friend_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:guster_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:heart_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:heartbreak_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:howl_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:miner_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:mourner_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:plenty_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:prize_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:scrape_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:sheaf_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 88,
     "unit_sell": 27
   },
   "minecraft:shelter_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:skull_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 49,
     "unit_sell": 15
   },
   "minecraft:sniffer_egg": {
@@ -152,7 +152,7 @@
   "minecraft:snort_pottery_sherd": {
     "category": "archaeology",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:armor_stand": {
@@ -1664,7 +1664,7 @@
   "minecraft:resin_brick": {
     "category": "blocks.bricks",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 35,
     "unit_sell": 11
   },
   "minecraft:resin_brick_slab": {
@@ -2126,7 +2126,7 @@
   "minecraft:calibrated_sculk_sensor": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 68,
     "unit_sell": 21
   },
   "minecraft:echo_shard": {
@@ -2138,31 +2138,31 @@
   "minecraft:sculk": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 19,
     "unit_sell": 6
   },
   "minecraft:sculk_catalyst": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 58,
     "unit_sell": 18
   },
   "minecraft:sculk_sensor": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 39,
     "unit_sell": 12
   },
   "minecraft:sculk_shrieker": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 48,
     "unit_sell": 15
   },
   "minecraft:sculk_vein": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:music_disc_11": {
@@ -2312,7 +2312,7 @@
   "minecraft:bee_nest": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 37,
     "unit_sell": 11
   },
   "minecraft:blaze_powder": {
@@ -2366,7 +2366,7 @@
   "minecraft:goat_horn": {
     "category": "drops",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 50,
     "unit_sell": 15
   },
   "minecraft:gunpowder": {
@@ -2396,7 +2396,7 @@
   "minecraft:honeycomb_block": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:leather": {
@@ -2540,109 +2540,109 @@
   "minecraft:resin_block": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 317,
     "unit_sell": 95
   },
   "minecraft:resin_clump": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 37,
     "unit_sell": 11
   },
   "minecraft:black_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 34,
     "unit_sell": 17
   },
   "minecraft:blue_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:brown_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 22,
     "unit_sell": 11
   },
   "minecraft:cyan_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 20,
     "unit_sell": 10
   },
   "minecraft:gray_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 28,
     "unit_sell": 14
   },
   "minecraft:green_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 22,
     "unit_sell": 11
   },
   "minecraft:light_blue_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 30,
     "unit_sell": 15
   },
   "minecraft:light_gray_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:lime_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 22,
     "unit_sell": 11
   },
   "minecraft:magenta_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 30,
     "unit_sell": 15
   },
   "minecraft:orange_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 22,
     "unit_sell": 11
   },
   "minecraft:pink_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:purple_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:red_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:white_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:yellow_banner": {
     "category": "dyes",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 18,
     "unit_sell": 9
   },
   "minecraft:black_bed": {
@@ -2738,385 +2738,385 @@
   "minecraft:black_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 5
   },
   "minecraft:blue_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:brown_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:cyan_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:gray_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:green_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:light_blue_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:light_gray_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:lime_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:magenta_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:orange_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:pink_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:purple_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:red_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:white_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 8,
     "unit_sell": 4
   },
   "minecraft:yellow_bundle": {
     "category": "dyes",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:black_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:blue_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:brown_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:cyan_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:gray_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:green_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:light_blue_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:light_gray_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:lime_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:magenta_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:orange_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:pink_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:purple_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:red_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:white_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:yellow_candle": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:black_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:black_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:blue_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:blue_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:gray_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:gray_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:green_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:green_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_gray_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_gray_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:orange_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:orange_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_concrete": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_concrete_powder": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:black_dye": {
@@ -3218,25 +3218,25 @@
   "minecraft:black_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:blue_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:glass": {
@@ -3248,97 +3248,97 @@
   "minecraft:gray_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:green_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_gray_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:orange_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_stained_glass": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:black_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:blue_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:glass_pane": {
@@ -3350,73 +3350,73 @@
   "minecraft:gray_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:green_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_gray_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:orange_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_stained_glass_pane": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:black_shulker_box": {
@@ -3518,283 +3518,283 @@
   "minecraft:black_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:blue_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:gray_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:green_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_gray_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:orange_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:black_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:blue_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:brown_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:cyan_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:gray_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:green_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:light_blue_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:light_gray_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:lime_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:magenta_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:orange_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:pink_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:purple_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:red_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:white_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:yellow_glazed_terracotta": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:black_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 3
   },
   "minecraft:blue_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:brown_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:cyan_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:gray_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:green_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:light_blue_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:light_gray_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:lime_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:magenta_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:orange_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:pink_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:purple_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:red_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:white_wool": {
@@ -3806,103 +3806,103 @@
   "minecraft:yellow_wool": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:black_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:blue_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:brown_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cyan_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:gray_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:green_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:light_blue_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:light_gray_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:lime_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:magenta_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:orange_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:pink_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:purple_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:red_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:white_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:yellow_carpet": {
     "category": "dyes",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:coarse_dirt": {
@@ -4724,13 +4724,13 @@
   "minecraft:dragon_breath": {
     "category": "blocks.end",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 36,
     "unit_sell": 12
   },
   "minecraft:end_crystal": {
     "category": "blocks.end",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 114,
     "unit_sell": 38
   },
   "minecraft:end_stone": {
@@ -4820,7 +4820,7 @@
   "minecraft:blue_egg": {
     "category": "drops",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:bread": {
@@ -4832,7 +4832,7 @@
   "minecraft:brown_egg": {
     "category": "drops",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:cake": {
@@ -4856,7 +4856,7 @@
   "minecraft:dried_kelp_block": {
     "category": "food",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:egg": {
@@ -4874,7 +4874,7 @@
   "minecraft:hay_block": {
     "category": "farming",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 5
   },
   "minecraft:milk_bucket": {
@@ -4886,7 +4886,7 @@
   "minecraft:poisonous_potato": {
     "category": "farming",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:sugar": {
@@ -5018,7 +5018,7 @@
   "minecraft:melon": {
     "category": "farming",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 5
   },
   "minecraft:melon_slice": {
@@ -5102,7 +5102,7 @@
   "minecraft:suspicious_stew": {
     "category": "food",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:blue_ice": {
@@ -5150,7 +5150,7 @@
   "minecraft:end_rod": {
     "category": "lights",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:jack_o_lantern": {
@@ -5366,7 +5366,7 @@
   "minecraft:nether_sprouts": {
     "category": "blocks.nether",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:netherite_upgrade_smithing_template": {
@@ -5942,7 +5942,7 @@
   "minecraft:amethyst_cluster": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 23,
     "unit_sell": 7
   },
   "minecraft:amethyst_shard": {
@@ -5972,19 +5972,19 @@
   "minecraft:coal_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:deepslate_coal_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:raw_copper_block": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 27,
     "unit_sell": 8
   },
   "minecraft:copper_ingot": {
@@ -6002,13 +6002,13 @@
   "minecraft:copper_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:deepslate_copper_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:raw_copper": {
@@ -6026,7 +6026,7 @@
   "minecraft:deepslate_diamond_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 1100,
     "unit_sell": 330
   },
   "minecraft:diamond": {
@@ -6038,7 +6038,7 @@
   "minecraft:diamond_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 1000,
     "unit_sell": 300
   },
   "minecraft:emerald_block": {
@@ -6050,7 +6050,7 @@
   "minecraft:deepslate_emerald_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 310,
     "unit_sell": 93
   },
   "minecraft:emerald": {
@@ -6062,7 +6062,7 @@
   "minecraft:emerald_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 300,
     "unit_sell": 90
   },
   "minecraft:gold_block": {
@@ -6074,13 +6074,13 @@
   "minecraft:raw_gold_block": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 540,
     "unit_sell": 162
   },
   "minecraft:deepslate_gold_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 87,
     "unit_sell": 26
   },
   "minecraft:gold_ingot": {
@@ -6098,13 +6098,13 @@
   "minecraft:gold_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 87,
     "unit_sell": 26
   },
   "minecraft:nether_gold_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 30,
     "unit_sell": 9
   },
   "minecraft:raw_gold": {
@@ -6122,13 +6122,13 @@
   "minecraft:raw_iron_block": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 137,
     "unit_sell": 41
   },
   "minecraft:deepslate_iron_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 20,
     "unit_sell": 6
   },
   "minecraft:iron_ingot": {
@@ -6146,7 +6146,7 @@
   "minecraft:iron_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 20,
     "unit_sell": 6
   },
   "minecraft:raw_iron": {
@@ -6158,7 +6158,7 @@
   "minecraft:deepslate_lapis_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 37,
     "unit_sell": 11
   },
   "minecraft:lapis_lazuli": {
@@ -6176,7 +6176,7 @@
   "minecraft:lapis_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 37,
     "unit_sell": 11
   },
   "minecraft:ancient_debris": {
@@ -6212,7 +6212,7 @@
   "minecraft:deepslate_redstone_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 33,
     "unit_sell": 10
   },
   "minecraft:redstone": {
@@ -6224,7 +6224,7 @@
   "minecraft:redstone_ore": {
     "category": "ores",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 30,
     "unit_sell": 9
   },
   "minecraft:bamboo": {
@@ -6236,7 +6236,7 @@
   "minecraft:bone_block": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 17,
     "unit_sell": 5
   },
   "minecraft:bone_meal": {
@@ -6266,7 +6266,7 @@
   "minecraft:carved_pumpkin": {
     "category": "farming",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:chorus_flower": {
@@ -6278,7 +6278,7 @@
   "minecraft:closed_eyeblossom": {
     "category": "plants",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cocoa_beans": {
@@ -6866,49 +6866,49 @@
   "minecraft:acacia_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:bamboo_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:birch_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cherry_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:crimson_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:dark_oak_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:jungle_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:mangrove_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:oak_button": {
@@ -6920,19 +6920,19 @@
   "minecraft:pale_oak_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:polished_blackstone_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:spruce_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:stone_button": {
@@ -6944,43 +6944,43 @@
   "minecraft:warped_button": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:acacia_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:bamboo_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:birch_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cherry_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:crimson_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:dark_oak_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:iron_door": {
@@ -6992,13 +6992,13 @@
   "minecraft:jungle_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:mangrove_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:oak_door": {
@@ -7010,115 +7010,115 @@
   "minecraft:pale_oak_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:spruce_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:warped_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:exposed_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:oxidized_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:waxed_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:waxed_exposed_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:waxed_oxidized_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:waxed_weathered_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:weathered_copper_door": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:acacia_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:bamboo_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:birch_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:cherry_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:crimson_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:dark_oak_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:jungle_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:mangrove_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:oak_pressure_plate": {
@@ -7130,19 +7130,19 @@
   "minecraft:pale_oak_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:polished_blackstone_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:spruce_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 1
   },
   "minecraft:stone_pressure_plate": {
@@ -7166,43 +7166,43 @@
   "minecraft:warped_pressure_plate": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 7,
     "unit_sell": 2
   },
   "minecraft:acacia_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:bamboo_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:birch_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:cherry_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:crimson_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:dark_oak_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:oak_trapdoor": {
@@ -7220,79 +7220,79 @@
   "minecraft:jungle_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:mangrove_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:pale_oak_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:spruce_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:warped_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:exposed_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:oxidized_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 17,
     "unit_sell": 5
   },
   "minecraft:waxed_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:waxed_exposed_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:waxed_oxidized_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 17,
     "unit_sell": 5
   },
   "minecraft:waxed_weathered_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 17,
     "unit_sell": 5
   },
   "minecraft:weathered_copper_trapdoor": {
     "category": "redstone",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:activator_rail": {
@@ -7850,7 +7850,7 @@
   "minecraft:pointed_dripstone": {
     "category": "blocks.stones",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:granite": {
@@ -8330,7 +8330,7 @@
   "minecraft:acacia_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:bamboo_raft": {
@@ -8342,7 +8342,7 @@
   "minecraft:bamboo_chest_raft": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 40,
     "unit_sell": 12
   },
   "minecraft:birch_boat": {
@@ -8354,7 +8354,7 @@
   "minecraft:birch_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:cherry_boat": {
@@ -8366,7 +8366,7 @@
   "minecraft:cherry_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:dark_oak_boat": {
@@ -8378,7 +8378,7 @@
   "minecraft:dark_oak_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:jungle_boat": {
@@ -8390,7 +8390,7 @@
   "minecraft:jungle_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:mangrove_boat": {
@@ -8402,7 +8402,7 @@
   "minecraft:mangrove_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 30,
     "unit_sell": 9
   },
   "minecraft:oak_boat": {
@@ -8426,7 +8426,7 @@
   "minecraft:pale_oak_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:spruce_boat": {
@@ -8438,7 +8438,7 @@
   "minecraft:spruce_chest_boat": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 8
   },
   "minecraft:minecart": {
@@ -8468,7 +8468,7 @@
   "minecraft:tnt_minecart": {
     "category": "transport",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 129,
     "unit_sell": 39
   },
   "minecraft:black_harness": {
@@ -8756,7 +8756,7 @@
   "minecraft:firework_star": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:fletching_table": {
@@ -8870,7 +8870,7 @@
   "minecraft:rabbit_foot": {
     "category": "drops",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:recovery_compass": {
@@ -8948,7 +8948,7 @@
   "minecraft:iron_bars": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:bookshelf": {
@@ -8966,7 +8966,7 @@
   "minecraft:iron_chain": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 19,
     "unit_sell": 6
   },
   "minecraft:chest": {
@@ -8978,97 +8978,97 @@
   "minecraft:copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 39,
     "unit_sell": 12
   },
   "minecraft:exposed_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 42,
     "unit_sell": 13
   },
   "minecraft:oxidized_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 45,
     "unit_sell": 14
   },
   "minecraft:weathered_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 42,
     "unit_sell": 13
   },
   "minecraft:waxed_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 42,
     "unit_sell": 13
   },
   "minecraft:waxed_exposed_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 42,
     "unit_sell": 13
   },
   "minecraft:waxed_oxidized_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 45,
     "unit_sell": 14
   },
   "minecraft:waxed_weathered_copper_chest": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 45,
     "unit_sell": 14
   },
   "minecraft:acacia_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:bamboo_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:birch_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cherry_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:crimson_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:dark_oak_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:jungle_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:mangrove_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:oak_fence": {
@@ -9080,67 +9080,67 @@
   "minecraft:pale_oak_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:spruce_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:warped_fence": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:acacia_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:bamboo_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 12,
     "unit_sell": 4
   },
   "minecraft:birch_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:cherry_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:crimson_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:dark_oak_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:jungle_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:mangrove_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:oak_fence_gate": {
@@ -9152,127 +9152,127 @@
   "minecraft:pale_oak_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:spruce_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 4,
     "unit_sell": 2
   },
   "minecraft:warped_fence_gate": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:axolotl_bucket": {
     "category": "drops",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 77,
     "unit_sell": 23
   },
   "minecraft:cod_bucket": {
     "category": "drops",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 63,
     "unit_sell": 19
   },
   "minecraft:pufferfish_bucket": {
     "category": "drops",
     "stack": 0,
-    "unit_buy": 0,
+    "unit_buy": 63,
     "unit_sell": 19
   },
   "minecraft:salmon_bucket": {
     "category": "drops",
     "stack": 0,
-    "unit_buy": 0,
+    "unit_buy": 63,
     "unit_sell": 19
   },
   "minecraft:tadpole_bucket": {
     "category": "drops",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 133,
     "unit_sell": 40
   },
   "minecraft:tropical_fish_bucket": {
     "category": "drops",
     "stack": 0,
-    "unit_buy": 0,
+    "unit_buy": 63,
     "unit_sell": 19
   },
   "minecraft:acacia_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:bamboo_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:birch_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:cherry_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:crimson_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:dark_oak_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:jungle_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:mangrove_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 24,
     "unit_sell": 8
   },
   "minecraft:oak_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:pale_oak_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:spruce_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:warped_hanging_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:glow_item_frame": {
@@ -9290,67 +9290,67 @@
   "minecraft:globe_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 771,
     "unit_sell": 240
   },
   "minecraft:bordure_indented_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:creeper_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 1446,
     "unit_sell": 450
   },
   "minecraft:field_masoned_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 5
   },
   "minecraft:flow_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 145,
     "unit_sell": 45
   },
   "minecraft:flower_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 3,
     "unit_sell": 1
   },
   "minecraft:guster_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 145,
     "unit_sell": 45
   },
   "minecraft:skull_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 579,
     "unit_sell": 180
   },
   "minecraft:piglin_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 579,
     "unit_sell": 180
   },
   "minecraft:mojang_banner_pattern": {
     "category": "utility",
     "stack": 1,
-    "unit_buy": 0,
+    "unit_buy": 482,
     "unit_sell": 150
   },
   "minecraft:exposed_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:lightning_rod": {
@@ -9362,157 +9362,157 @@
   "minecraft:oxidized_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:weathered_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:waxed_exposed_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:waxed_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:waxed_oxidized_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 5
   },
   "minecraft:waxed_weathered_lightning_rod": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 13,
     "unit_sell": 4
   },
   "minecraft:acacia_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:bamboo_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:birch_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:cherry_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:crimson_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:dark_oak_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:jungle_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:mangrove_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 16,
     "unit_sell": 5
   },
   "minecraft:oak_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:pale_oak_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:spruce_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:warped_shelf": {
     "category": "utility",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 10,
     "unit_sell": 3
   },
   "minecraft:acacia_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:bamboo_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:birch_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:cherry_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:crimson_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:dark_oak_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:jungle_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:mangrove_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:oak_sign": {
@@ -9524,19 +9524,19 @@
   "minecraft:pale_oak_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:spruce_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 2,
     "unit_sell": 1
   },
   "minecraft:warped_sign": {
     "category": "wood",
     "stack": 16,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:arrow": {
@@ -9686,13 +9686,13 @@
   "minecraft:stripped_acacia_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_acacia_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:acacia_log": {
@@ -9746,7 +9746,7 @@
   "minecraft:stripped_bamboo_block": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:birch_log": {
@@ -9782,13 +9782,13 @@
   "minecraft:stripped_birch_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_birch_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:cherry_log": {
@@ -9824,13 +9824,13 @@
   "minecraft:stripped_cherry_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_cherry_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:crimson_hyphae": {
@@ -9866,13 +9866,13 @@
   "minecraft:stripped_crimson_hyphae": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 12,
     "unit_sell": 4
   },
   "minecraft:stripped_crimson_stem": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:dark_oak_log": {
@@ -9908,13 +9908,13 @@
   "minecraft:stripped_dark_oak_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_dark_oak_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:jungle_log": {
@@ -9950,13 +9950,13 @@
   "minecraft:stripped_jungle_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_jungle_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:mangrove_log": {
@@ -9992,13 +9992,13 @@
   "minecraft:stripped_mangrove_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 15,
     "unit_sell": 5
   },
   "minecraft:stripped_mangrove_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 21,
     "unit_sell": 7
   },
   "minecraft:oak_log": {
@@ -10034,13 +10034,13 @@
   "minecraft:stripped_oak_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_oak_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:pale_oak_log": {
@@ -10076,13 +10076,13 @@
   "minecraft:stripped_pale_oak_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:stripped_pale_oak_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 12,
     "unit_sell": 4
   },
   "minecraft:spruce_log": {
@@ -10118,25 +10118,25 @@
   "minecraft:stripped_spruce_log": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 6,
     "unit_sell": 2
   },
   "minecraft:stripped_spruce_wood": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:stripped_warped_hyphae": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 12,
     "unit_sell": 4
   },
   "minecraft:stripped_warped_stem": {
     "category": "wood",
     "stack": 64,
-    "unit_buy": 0,
+    "unit_buy": 9,
     "unit_sell": 3
   },
   "minecraft:warped_hyphae": {
